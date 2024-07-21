@@ -1,214 +1,157 @@
-<!DOCTYPE html><html><head><base href="https://simpleportfolio.ai"><title>Kelly's AI Solutions Portfolio</title><style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f5f7;
-      color: #1d1d1f;
-      line-height: 1.47059;
-      font-weight: 400;
-      letter-spacing: -0.022em;
-    }
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 22px;
-    }
-    header {
-      background-color: rgba(255, 255, 255, 0.8);
-      backdrop-filter: saturate(180%) blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      padding: 20px 0;
-    }
-    h1, h2 {
-      font-size: 48px;
-      line-height: 1.08349;
-      font-weight: 600;
-      letter-spacing: -0.003em;
-      margin-top: 60px;
-    }
-    h2 {
-      font-size: 40px;
-    }
-    .hero {
-      text-align: center;
-      padding: 100px 0;
-      background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
-    }
-    .hero p {
-      font-size: 21px;
-      line-height: 1.381;
-      font-weight: 400;
-      letter-spacing: .011em;
-      margin-top: 6px;
-    }
-    .section {
-      padding: 100px 0;
-      border-bottom: 1px solid #d2d2d7;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
-    .project {
-      background-color: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 2px 4px 12px rgba(0,0,0,.08);
-      transition: all .3s cubic-bezier(0,0,.5,1);
-    }
-    .project:hover {
-      transform: scale(1.02);
-      box-shadow: 2px 4px 16px rgba(0,0,0,.16);
-    }
-    .project img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .project-info {
-      padding: 30px;
-    }
-    .project-info h3 {
-      font-size: 24px;
-      line-height: 1.16667;
-      font-weight: 600;
-      letter-spacing: .009em;
-      margin: 0 0 10px;
-    }
-    .project-info p {
-      font-size: 14px;
-      line-height: 1.42859;
-      font-weight: 400;
-      letter-spacing: -0.016em;
-      margin: 0;
-    }
-    .about, .contact {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    footer {
-      text-align: center;
-      padding: 20px 0;
-      font-size: 12px;
-      color: #86868b;
-    }
-  </style></head><body>
+ <!DOCTYPE html>
+  <html>
+  <head>
+    <base href="https://simpleportfolio.ai">
+    <title>Kelly's AI Solutions Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
     <header>
       <div class="container">
         <h1>Kelly's Portfolio</h1>
       </div>
     </header>
-  
+
     <main>
       <section id="home" class="hero">
         <div class="container">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse;">
-    <p style="flex: 1; margin-left: 40px;">AI Solution Architect with diverse expertise and industry experience:
-  
-  • Education: Business Technology Management, Computer Science, Data Analytics
-  • Industries: Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation
-  • Technical Skills: SQL, Python, Java, R, Tableau, Power BI, Databricks, Advanced Excel
-  • Focus Areas: 
-    - Information System Architecture
-    - MLOps
-    - Data Governance
-    - Data-Driven Strategic Decision-Making
-    - Operation Management
-    - Failure Analysis
-  
-  I'm passionate about leveraging big data to solve complex business challenges. Let's connect and explore how I can bring value to your organization's analytical initiatives.</p>
-    <div style="flex: 0 0 300px; margin-right: 40px;">
-      <img src="headshot.jpg" alt="Kelly's professional headshot" width="300" height="300" style="border-radius: 50%; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-    </div>
-  </div>
-  </div>
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse;">
+            <p style="flex: 1; margin-left: 40px;">AI Solution Architect with
+              diverse expertise and industry experience:
+
+              • Education: Business Technology Management, Computer Science,
+              Data Analytics
+              • Industries: Energy, Industrial Automation, Pharmaceutical,
+              Precision Electronics, Transportation
+              • Technical Skills: SQL, Python, Java, R, Tableau, Power BI,
+              Databricks, Advanced Excel
+              • Focus Areas:
+              - Information System Architecture
+              - MLOps
+              - Data Governance
+              - Data-Driven Strategic Decision-Making
+              - Operation Management
+              - Failure Analysis
+
+              I'm passionate about leveraging big data to solve complex business
+              challenges. Let's connect and explore how I can bring value to
+              your organization's analytical initiatives.</p>
+            <div style="flex: 0 0 300px; margin-right: 40px;">
+              <img src="headshot.jpg" alt="Kelly's professional headshot"
+                width="300" height="300"
+                style="border-radius: 50%; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            </div>
+          </div>
+        </div>
       </section>
-  
+
       <section id="projects" class="section">
         <div class="container">
           <h2>Projects</h2>
           <div class="projects">
-    <div class="project">
-      <img src="project1.jpg" alt="Project 1: Energy Sector AI Implementation" width="300" height="200">
-      <div class="project-info">
-        <h3>Energy Sector AI Implementation</h3>
-        <p>Optimized power grid management using machine learning algorithms.</p>
-      </div>
-    </div>
-    <div class="project">
-      <img src="project2.jpg" alt="Project 2: Pharmaceutical Process Automation" width="300" height="200">
-      <div class="project-info">
-        <h3>Pharmaceutical Process Automation</h3>
-        <p>Developed AI-driven quality control system for drug manufacturing.</p>
-      </div>
-    </div>
-    <div class="project">
-      <img src="project3.jpg" alt="Project 3: Precision Electronics Predictive Maintenance" width="300" height="200">
-      <div class="project-info">
-        <h3>Precision Electronics Predictive Maintenance</h3>
-        <p>Implemented AI for predicting equipment failures in electronics manufacturing.</p>
-      </div>
-    </div>
-    <div class="project">
-      <img src="project4.jpg" alt="Project 4: Transportation Logistics Optimization" width="300" height="200">
-      <div class="project-info">
-        <h3>Transportation Logistics Optimization</h3>
-        <p>Created an AI-powered system for optimizing route planning and resource allocation in transportation.</p>
-      </div>
-    </div>
-    <div class="project">
-      <img src="project5.jpg" alt="Project 5: Industrial Automation Data Analysis" width="300" height="200">
-      <div class="project-info">
-        <h3>Industrial Automation Data Analysis</h3>
-        <p>Developed a comprehensive data analytics platform for improving efficiency in industrial automation processes.</p>
-      </div>
-    </div>
-    <div class="project">
-      <img src="project6.jpg" alt="Project 6: MLOps Pipeline Implementation" width="300" height="200">
-      <div class="project-info">
-        <h3>MLOps Pipeline Implementation</h3>
-        <p>Designed and implemented a robust MLOps pipeline for streamlined machine learning model deployment and management.</p>
-      </div>
-    </div>
-  </div>
+            <div class="project">
+              <img src="project1.jpg"
+                alt="Project 1: Energy Sector AI Implementation" width="300"
+                height="200">
+              <div class="project-info">
+                <h3>Energy Sector AI Implementation</h3>
+                <p>Optimized power grid management using machine learning
+                  algorithms.</p>
+              </div>
+            </div>
+            <div class="project">
+              <img src="project2.jpg"
+                alt="Project 2: Pharmaceutical Process Automation" width="300"
+                height="200">
+              <div class="project-info">
+                <h3>Pharmaceutical Process Automation</h3>
+                <p>Developed AI-driven quality control system for drug
+                  manufacturing.</p>
+              </div>
+            </div>
+            <div class="project">
+              <img src="project3.jpg"
+                alt="Project 3: Precision Electronics Predictive Maintenance"
+                width="300" height="200">
+              <div class="project-info">
+                <h3>Precision Electronics Predictive Maintenance</h3>
+                <p>Implemented AI for predicting equipment failures in
+                  electronics manufacturing.</p>
+              </div>
+            </div>
+            <div class="project">
+              <img src="project4.jpg"
+                alt="Project 4: Transportation Logistics Optimization"
+                width="300" height="200">
+              <div class="project-info">
+                <h3>Transportation Logistics Optimization</h3>
+                <p>Created an AI-powered system for optimizing route planning
+                  and resource allocation in transportation.</p>
+              </div>
+            </div>
+            <div class="project">
+              <img src="project5.jpg"
+                alt="Project 5: Industrial Automation Data Analysis" width="300"
+                height="200">
+              <div class="project-info">
+                <h3>Industrial Automation Data Analysis</h3>
+                <p>Developed a comprehensive data analytics platform for
+                  improving efficiency in industrial automation processes.</p>
+              </div>
+            </div>
+            <div class="project">
+              <img src="project6.jpg"
+                alt="Project 6: MLOps Pipeline Implementation" width="300"
+                height="200">
+              <div class="project-info">
+                <h3>MLOps Pipeline Implementation</h3>
+                <p>Designed and implemented a robust MLOps pipeline for
+                  streamlined machine learning model deployment and
+                  management.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-  
+
       <section id="about" class="section">
         <div class="container">
           <h2>About Me</h2>
           <div class="about">
-            <p>With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project.</p>
-            <p>I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries.</p>
+            <p>With a strong background in AI and data analytics, I specialize
+              in creating innovative solutions for complex industrial problems.
+              My experience spans multiple sectors, allowing me to bring a
+              unique perspective to each project.</p>
+            <p>I'm passionate about leveraging cutting-edge AI technologies to
+              drive efficiency, reduce costs, and improve outcomes across
+              various industries.</p>
           </div>
         </div>
       </section>
-  
+
       <section id="contact" class="section">
         <div class="container">
           <h2>Contact</h2>
           <div class="contact">
-            <p>Interested in collaborating or learning more about my work? Feel free to reach out!</p>
+            <p>Interested in collaborating or learning more about my work? Feel
+              free to reach out!</p>
             <p>Email: chengyan.liu@mail.mcgill.ca</p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/kelly-chengyan-liu/">linkedin.com/in/kelly-chengyan-liu</a></p>
-            <p>GitHub: <a href="https://github.com/CLIUKELLY">github.com/CLIUKELLY</a></p>
+            <p>LinkedIn: <a
+                href="https://www.linkedin.com/in/kelly-chengyan-liu/">linkedin.com/in/kelly-chengyan-liu</a></p>
+            <p>GitHub: <a
+                href="https://github.com/CLIUKELLY">github.com/CLIUKELLY</a></p>
           </div>
         </div>
       </section>
     </main>
-  
+
     <footer>
       <div class="container">
         <p>© 2023 Kelly's AI Solutions Portfolio. All rights reserved.</p>
       </div>
     </footer>
   </body></html>
-
 
 <!-- <!DOCTYPE html>
 <html lang="en">
