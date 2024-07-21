@@ -22,7 +22,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 999;
-  padding: 10px 0;
+  padding: 5px 0;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -30,11 +30,12 @@ header {
 header h1 {
   font-size: 2.5em;
   margin: 0;
+  margin-top: 0.5em;
 }
 
 header h3 {
   font-size: 1.5em;
-  margin-top: 0.5em;
+  margin-top: 0em;
 }
 
 /* Hero Section */
@@ -120,8 +121,64 @@ header h3 {
   font-size: 1em;
   margin: 0;
 }
-
 /* About and Contact Sections */
+.about, .contact-info {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.contact-info p {
+  margin-left: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.contact-info ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-info ul li i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #1d1d1f;
+}
+
+.contact-info ul li a {
+  color: #1d1d1f;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.contact-info ul li a:hover {
+  border-bottom: 1px solid #1d1d1f;
+}
+
+/* About and Contact Sections
 .about, .contact-info {
   max-width: 600px;
   margin: 0 auto;
@@ -154,7 +211,7 @@ header h3 {
 
 .contact-info ul li a:hover {
   border-bottom: 1px solid #1d1d1f;
-}
+} */
 
 /* Language Switcher Styles */
 .language-switcher {
