@@ -16,7 +16,7 @@ body {
 }
 
 /* Header */
-header {
+/* header {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: saturate(180%) blur(20px);
   position: sticky;
@@ -24,6 +24,17 @@ header {
   z-index: 999;
   padding: 20px 0;
   text-align: center;
+} */
+
+header {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  backdrop-filter: saturate(180%) blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -128,6 +139,34 @@ header h3 {
 
 .contact-info p {
   margin-left: 0;
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.language-switcher button {
+  background-color: #f2f2f2;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin: 0 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.language-switcher button:hover {
+  background-color: #e0e0e0;
+}
+
+.language-switcher button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 footer {
