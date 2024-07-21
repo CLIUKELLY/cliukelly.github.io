@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <base href="https://cliukelly.github.io">
   <title>Kelly's AI Solutions Portfolio</title>
@@ -10,6 +10,10 @@
     <div class="container">
       <h1>Kelly Liu</h1>
       <h3>Aspiring AI Solution Architect</h3>
+      <div class="language-switcher">
+        <button onclick="switchLanguage('en')">English</button>
+        <button onclick="switchLanguage('zh')">中文</button>
+      </div>
     </div>
   </header>
 
@@ -18,22 +22,21 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <h2>About Me</h2>
-            <h3>AI Solution Architect with diverse expertise and industry experience</h3>
-            <p><strong>Education:</strong> Business Technology Management, Computer Science, Data Analytics</p>
-            <p><strong>Industries:</strong> Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation</p>
-            <p><strong>Technical Skills:</strong> SQL, Python, Java, R, Tableau, Power BI, Databricks, Advanced Excel</p>
+            <h2 data-en="About Me" data-zh="关于我">About Me</h2>
+            <h3 data-en="AI Solution Architect with diverse expertise and industry experience" data-zh="具有多样专业知识和行业经验的AI解决方案架构师">AI Solution Architect with diverse expertise and industry experience</h3>
+            <p data-en="<strong>Education:</strong> Business Technology Management, Computer Science, Data Analytics" data-zh="<strong>教育背景：</strong>商业技术管理，计算机科学，数据分析"><strong>Education:</strong> Business Technology Management, Computer Science, Data Analytics</p>
+            <p data-en="<strong>Industries:</strong> Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation" data-zh="<strong>行业：</strong>能源，工业自动化，制药，精密电子，交通"><strong>Industries:</strong> Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation</p>
+            <p data-en="<strong>Technical Skills:</strong> SQL, Python, Java, R, Tableau, Power BI, Databricks, Advanced Excel" data-zh="<strong>技术技能：</strong>SQL，Python，Java，R，Tableau，Power BI，Databricks，高级Excel"><strong>Technical Skills:</strong> SQL, Python, Java, R, Tableau, Power BI, Databricks, Advanced Excel</p>
             <ul>
-              <li>Information System Architecture</li>
-              <li>MLOps</li>
-              <li>Data Governance</li>
-              <li>Data-Driven Strategic Decision-Making</li>
-              <li>Operation Management</li>
-              <li>Failure Analysis</li>
+              <li data-en="Information System Architecture" data-zh="信息系统架构">Information System Architecture</li>
+              <li data-en="MLOps" data-zh="MLOps">MLOps</li>
+              <li data-en="Data Governance" data-zh="数据治理">Data Governance</li>
+              <li data-en="Data-Driven Strategic Decision-Making" data-zh="数据驱动的战略决策">Data-Driven Strategic Decision-Making</li>
+              <li data-en="Operation Management" data-zh="运营管理">Operation Management</li>
+              <li data-en="Failure Analysis" data-zh="故障分析">Failure Analysis</li>
             </ul>
-            <!-- <p>I'm passionate about leveraging big data to solve complex business challenges. Let's connect and explore how I can bring value to your organization's analytical initiatives.</p> -->
-            <p>With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project. I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries.</p>
-            <p><a href="resume/McGill MM Analytics_Chengyan(Kelly) Liu.pdf" class="btn">View My Resume</a></p>
+            <p data-en="With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project. I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries." data-zh="凭借AI和数据分析的坚实背景，我专注于为复杂的工业问题创造创新解决方案。我的经验涵盖多个行业，使我能够为每个项目带来独特的视角。我热衷于利用尖端的AI技术来提高效率，降低成本，并改善各行业的结果。">With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project. I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries.</p>
+            <p><a href="resume/McGill MM Analytics_Chengyan(Kelly) Liu.pdf" class="btn" data-en="View My Resume" data-zh="查看我的简历">View My Resume</a></p>
           </div>
           <div class="hero-image">
             <img src="image/headshot.jpg" alt="Kelly's professional headshot">
@@ -44,48 +47,48 @@
 
     <section id="projects" class="section">
       <div class="container">
-        <h2>Projects</h2>
+        <h2 data-en="Projects" data-zh="项目">Projects</h2>
         <div class="projects">
           <div class="project">
             <img src="project1.jpg" alt="Project 1: Energy Sector AI Implementation" width="300" height="200">
             <div class="project-info">
-              <h3>Energy Sector AI Implementation</h3>
-              <p>Optimized power grid management using machine learning algorithms.</p>
+              <h3 data-en="Energy Sector AI Implementation" data-zh="能源领域AI实施">Energy Sector AI Implementation</h3>
+              <p data-en="Optimized power grid management using machine learning algorithms." data-zh="使用机器学习算法优化电网管理。">Optimized power grid management using machine learning algorithms.</p>
             </div>
           </div>
           <div class="project">
             <img src="project2.jpg" alt="Project 2: Pharmaceutical Process Automation" width="300" height="200">
             <div class="project-info">
-              <h3>Pharmaceutical Process Automation</h3>
-              <p>Developed AI-driven quality control system for drug manufacturing.</p>
+              <h3 data-en="Pharmaceutical Process Automation" data-zh="制药过程自动化">Pharmaceutical Process Automation</h3>
+              <p data-en="Developed AI-driven quality control system for drug manufacturing." data-zh="开发了用于药物制造的AI驱动质量控制系统。">Developed AI-driven quality control system for drug manufacturing.</p>
             </div>
           </div>
           <div class="project">
             <img src="project3.jpg" alt="Project 3: Precision Electronics Predictive Maintenance" width="300" height="200">
             <div class="project-info">
-              <h3>Precision Electronics Predictive Maintenance</h3>
-              <p>Implemented AI for predicting equipment failures in electronics manufacturing.</p>
+              <h3 data-en="Precision Electronics Predictive Maintenance" data-zh="精密电子预测性维护">Precision Electronics Predictive Maintenance</h3>
+              <p data-en="Implemented AI for predicting equipment failures in electronics manufacturing." data-zh="在电子制造中实施AI预测设备故障。">Implemented AI for predicting equipment failures in electronics manufacturing.</p>
             </div>
           </div>
           <div class="project">
             <img src="project4.jpg" alt="Project 4: Transportation Logistics Optimization" width="300" height="200">
             <div class="project-info">
-              <h3>Transportation Logistics Optimization</h3>
-              <p>Created an AI-powered system for optimizing route planning and resource allocation in transportation.</p>
+              <h3 data-en="Transportation Logistics Optimization" data-zh="运输物流优化">Transportation Logistics Optimization</h3>
+              <p data-en="Created an AI-powered system for optimizing route planning and resource allocation in transportation." data-zh="创建了一个AI驱动的系统，用于优化运输中的路线规划和资源分配。">Created an AI-powered system for optimizing route planning and resource allocation in transportation.</p>
             </div>
           </div>
           <div class="project">
             <img src="project5.jpg" alt="Project 5: Industrial Automation Data Analysis" width="300" height="200">
             <div class="project-info">
-              <h3>Industrial Automation Data Analysis</h3>
-              <p>Developed a comprehensive data analytics platform for improving efficiency in industrial automation processes.</p>
+              <h3 data-en="Industrial Automation Data Analysis" data-zh="工业自动化数据分析">Industrial Automation Data Analysis</h3>
+              <p data-en="Developed a comprehensive data analytics platform for improving efficiency in industrial automation processes." data-zh="开发了一个全面的数据分析平台，以提高工业自动化过程中的效率。">Developed a comprehensive data analytics platform for improving efficiency in industrial automation processes.</p>
             </div>
           </div>
           <div class="project">
             <img src="project6.jpg" alt="Project 6: MLOps Pipeline Implementation" width="300" height="200">
             <div class="project-info">
-              <h3>MLOps Pipeline Implementation</h3>
-              <p>Designed and implemented a robust MLOps pipeline for streamlined machine learning model deployment and management.</p>
+              <h3 data-en="MLOps Pipeline Implementation" data-zh="MLOps管道实施">MLOps Pipeline Implementation</h3>
+              <p data-en="Designed and implemented a robust MLOps pipeline for streamlined machine learning model deployment and management." data-zh="设计并实施了一个强大的MLOps管道，用于简化机器学习模型的部署和管理。">Designed and implemented a robust MLOps pipeline for streamlined machine learning model deployment and management.</p>
             </div>
           </div>
         </div>
@@ -94,9 +97,9 @@
 
     <section id="contact" class="section">
       <div class="container">
-        <h2>Contact</h2>
+        <h2 data-en="Contact" data-zh="联系">Contact</h2>
         <div class="contact-info">
-          <p>Interested in collaborating or learning more about my work? Feel free to reach out!</p>
+          <p data-en="Interested in collaborating or learning more about my work? Feel free to reach out!" data-zh="有兴趣合作或了解更多关于我的工作？随时联系我！">Interested in collaborating or learning more about my work? Feel free to reach out!</p>
           <p>Email: chengyan.liu@mail.mcgill.ca</p>
           <p>LinkedIn: <a href="https://www.linkedin.com/in/kelly-chengyan-liu/">linkedin.com/in/kelly-chengyan-liu</a></p>
           <p>GitHub: <a href="https://github.com/CLIUKELLY">github.com/CLIUKELLY</a></p>
@@ -107,8 +110,16 @@
 
   <footer>
     <div class="container">
-      <p>© 2024 Kelly's AI Solutions Portfolio. All rights reserved.</p>
+      <p data-en="© 2024 Kelly's AI Solutions Portfolio. All rights reserved." data-zh="© 2024 Kelly's AI解决方案组合。版权所有。">© 2024 Kelly's AI Solutions Portfolio. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    function switchLanguage(lang) {
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.innerHTML = el.getAttribute('data-' + lang);
+      });
+    }
+  </script>
 </body>
 </html>
