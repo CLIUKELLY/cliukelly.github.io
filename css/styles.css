@@ -115,11 +115,13 @@ header h3 {
 .project-info h3 {
   font-size: 1.5em;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .project-info p {
   font-size: 1em;
   margin: 0;
+  text-align: justify;
 }
 /* About and Contact Sections */
 .about, .contact-info {
