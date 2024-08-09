@@ -55,19 +55,23 @@ header h3 {
 
 .hero-text {
   flex: 1;
+  text-align: justify;
 }
 
 .hero-text h2 {
   font-size: 1.8em;
+  text-align: justify;
 }
 
 .hero-text p, .hero-text ul {
   font-size: 1em;
+  text-align: justify;
 }
 
 .hero-text a {
   font-size: 1em;
   text-decoration: none; 
+  text-align: justify;
 }
 
 .hero-text ul {
