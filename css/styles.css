@@ -86,7 +86,7 @@ header h3 {
 
 .hero-image {
   flex: 0 0 300px;
-  margin-top: 0px; /* Adjusts the image to move it up if needed */
+  margin-top: -60px; /* Adjusts the image to move it up if needed */
 }
 
 .hero-image img {
