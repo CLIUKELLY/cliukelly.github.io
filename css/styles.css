@@ -48,45 +48,35 @@ header h3 {
 
 .hero-content {
   display: flex;
-  flex-wrap: wrap; /* Allows content to wrap under the image */
-  align-items: flex-start;
+  justify-content: space-between;
   gap: 20px;
 }
 
 .hero-text {
-  flex: 1 1 60%; /* Allows the text to take up to 60% of the width */
+  flex: 1;
   text-align: justify;
 }
 
 .hero-text h2 {
   font-size: 1.8em;
-  text-align: justify;
+  margin-bottom: 20px;
 }
 
-.hero-text p, .hero-text ul {
+.hero-text p {
   font-size: 1em;
-  text-align: justify;
+  margin-bottom: 20px;
 }
 
-.hero-text a {
-  font-size: 1em;
-  text-decoration: none; 
-  text-align: justify;
-}
-
-/* Adjusting the Skills section to take up the full width */
-.hero-text ul {
-  padding-left: 20px;
-  width: 100%; /* Makes the skills section take up the full row */
-}
-
-.hero-text ul li {
-  margin-bottom: 10px; /* Adds some space between list items for better readability */
-}
-
+/* Image Section */
 .hero-image {
   flex: 0 0 300px;
-  margin-top: -60px; /* Adjusts the image to move it up if needed */
+  display: flex;
+  align-items:self-start;
+  justify-content:center;
+  margin-top: 50px; 
+  margin-left: auto; 
+  margin-right: auto;
+  padding: 0 10px;
 }
 
 .hero-image img {
@@ -94,7 +84,33 @@ header h3 {
   height: auto;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 100%; 
+}
+
+/* Education and Skills Section */
+.education-skills {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd; /* Add a border to separate from the About Me section */
+  width: 100%; /* Ensure it takes the full row */
+}
+
+.education-skills h4 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.education-skills ul {
+  padding-left: 20px;
+  columns: 1; 
+  column-gap: 40px;
+}
+
+.education-skills ul li {
+  margin-bottom: 10px;
+  break-inside: avoid;
+  line-height: 1; 
 }
 
 /* Projects Section */
