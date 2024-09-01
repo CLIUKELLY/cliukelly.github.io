@@ -59,17 +59,17 @@ header h3 {
 
 .header-nav ul li a {
   text-decoration: none;
-  color: #e0e0e0;;
+  color: #333333;
   font-size: 1.1em;
   padding: 8px 16px;
-  border-radius: 5px;
+  border-radius: 0px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header-nav ul li a:hover,
 .header-nav ul li a.active {
-  background-color: #e0e0e0;;
-  color: #ffffff;
+  background-color: #e0e0e0;
+  color: #333333;
 }
 
 /* Hero Section */
