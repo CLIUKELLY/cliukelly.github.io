@@ -1,289 +1,727 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="https://cliukelly.github.io">
-  <title>Kelly's AI Solutions Portfolio</title>
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kelly Liu</title>
+<style>
+  :root {
+    --bg: #0A0A0A; --bg2: #111; --bg3: #1A1A1A; --border: #222;
+    --accent: #FF3B3B; --accent2: #FF6B6B;
+    --text: #F0F0F0; --text2: #888; --text3: #555; --white: #FFF;
+    --node: #FF3B3B; --node2: #888; --edge: #333;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
+
+  .mesh-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .12; animation: meshFloat 20s ease-in-out infinite; }
+  .mesh-bg .blob:nth-child(1) { width: 600px; height: 600px; background: #FF3B3B; top: -200px; right: -100px; }
+  .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: #7B2FFF; bottom: -150px; left: -100px; animation-delay: -7s; }
+  .mesh-bg .blob:nth-child(3) { width: 400px; height: 400px; background: #FF8C00; top: 40%; left: 30%; animation-delay: -14s; opacity: .06; }
+  @keyframes meshFloat { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(30px,-20px) scale(1.05); } 50% { transform: translate(-20px,30px) scale(.95); } 75% { transform: translate(20px,20px) scale(1.02); } }
+
+  nav { position: fixed; inset: 0 auto auto 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: rgba(10,10,10,.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -.3px; text-transform: uppercase; color: var(--white); }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text2); transition: color .2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+  .hero-inner { max-width: 900px; width: 100%; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .hero-eyebrow .line { width: 40px; height: 2px; background: var(--accent); animation: expandLine 1s ease-out; }
+  .hero-eyebrow span { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); }
+  .hero-name { font-size: clamp(64px, 10vw, 120px); font-weight: 900; letter-spacing: -4px; line-height: .92; color: var(--white); text-transform: uppercase; margin-bottom: 32px; }
+  .hero-name .underline { display: block; position: relative; }
+  .hero-name .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 4px; background: var(--accent); animation: expandLine 1.2s ease-out .3s both; }
+  @keyframes expandLine { from { width: 0; } to { width: 100%; } }
+
+  .typewriter-container { min-height: 120px; margin-bottom: 40px; }
+  .typewriter-prompt { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .typewriter-prompt-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--white); font-weight: 700; }
+  .typewriter-prompt-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
+  .typewriter-text { font-size: 17px; color: var(--text2); line-height: 1.75; max-width: 620px; }
+  .typewriter-text strong { color: var(--text); font-weight: 600; }
+  .typewriter-cursor { display: inline-block; width: 3px; height: 1.1em; background: var(--accent); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-meta { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta-item .label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
+  .hero-meta-item .value { font-size: 14px; font-weight: 600; color: var(--text); }
+  .hero-cta { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-radius: 4px; transition: all .2s; cursor: pointer; border: 2px solid; }
+  .btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border); }
+  .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
+
+  section { padding: 100px 48px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
+  .section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; }
+  .section-num { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); min-width: 32px; }
+  .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; color: var(--white); line-height: 1.0; }
+  .section-line { flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
+
+  .work-list { display: flex; flex-direction: column; gap: 0; }
+  .work-item { display: grid; grid-template-columns: 200px 1fr 140px; gap: 0 40px; align-items: start; padding: 36px 0; border-top: 1px solid var(--border); transition: all .3s; }
+  .work-item:last-child { border-bottom: 1px solid var(--border); }
+  .work-item:hover { background: rgba(255,59,59,.02); padding-left: 16px; margin-left: -16px; }
+  .work-period { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--text3); text-transform: uppercase; padding-top: 4px; }
+  .work-company { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -.3px; margin-bottom: 4px; }
+  .work-role { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .work-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .work-desc strong { color: var(--text); font-weight: 600; }
+  .work-location { font-size: 11px; color: var(--text3); text-align: right; padding-top: 4px; letter-spacing: .05em; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+  .project-card { background: var(--bg2); padding: 32px; transition: background .2s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height .3s ease; }
+  .project-card:hover { background: var(--bg3); }
+  .project-card:hover::before { height: 100%; }
+  .project-award { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .project-title { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 8px; letter-spacing: -.3px; }
+  .project-desc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 20px; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; }
+  .project-link { display: inline-block; margin-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .project-link:hover { color: var(--accent2); }
+
+  .constellation-wrap { position: relative; width: 100%; height: 600px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .constellation-canvas { width: 100%; height: 100%; cursor: grab; }
+  .constellation-canvas:active { cursor: grabbing; }
+  .constellation-overlay { position: absolute; bottom: 24px; left: 24px; pointer-events: none; }
+  .constellation-hint { font-size: 11px; color: var(--text3); letter-spacing: .05em; }
+  .constellation-legend { display: flex; gap: 16px; margin-top: 8px; }
+  .constellation-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
+  .constellation-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .constellation-legend-dot.red { background: var(--accent); }
+  .constellation-legend-dot.gray { background: var(--node2); }
+
+  .writing-list { display: flex; flex-direction: column; gap: 0; }
+  .writing-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 0 32px; align-items: center; padding: 28px 0; border-top: 1px solid var(--border); transition: padding-left .2s; }
+  .writing-item:last-child { border-bottom: 1px solid var(--border); }
+  .writing-item:hover { padding-left: 8px; }
+  .writing-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--text3); }
+  .writing-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: -.2px; }
+  .writing-sub { font-size: 13px; color: var(--text2); }
+  .writing-coming { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; }
+
+  .now-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; }
+  .now-card { background: var(--bg2); padding: 32px; transition: background .2s; }
+  .now-card:hover { background: var(--bg3); }
+  .now-icon { font-size: 28px; margin-bottom: 16px; display: block; transition: transform .3s; }
+  .now-card:hover .now-icon { transform: scale(1.1); }
+  .now-label { font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .now-text { font-size: 14px; color: var(--text2); line-height: 1.7; }
+  .now-text strong { color: var(--text); }
+
+  footer { padding: 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; position: relative; z-index: 1; }
+  .footer-name { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); transition: color .2s; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copy { font-size: 11px; color: var(--text3); }
+
+  .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 200; }
+  .chat-toggle { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--white); border: none; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(255,59,59,.3); transition: all .3s; animation: pulseChat 3s ease-in-out infinite; }
+  .chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,59,59,.5); }
+  .chat-toggle.active { background: var(--bg3); }
+  @keyframes pulseChat { 0%,100% { box-shadow: 0 4px 20px rgba(255,59,59,.3); } 50% { box-shadow: 0 4px 30px rgba(255,59,59,.5); } }
+  .chat-panel { position: absolute; bottom: 72px; right: 0; width: 380px; max-width: calc(100vw - 48px); max-height: 500px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,.5); transform: translateY(20px) scale(.95); opacity: 0; pointer-events: none; transition: all .3s cubic-bezier(.34,1.56,.64,1); }
+  .chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
+  .chat-header { padding: 16px 20px; background: var(--bg3); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+  .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--white); font-weight: 700; }
+  .chat-header-info { flex: 1; }
+  .chat-header-name { font-size: 14px; font-weight: 700; color: var(--white); }
+  .chat-header-status { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+  .chat-header-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00FF85; animation: statusPulse 2s ease-in-out infinite; }
+  @keyframes statusPulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+  .chat-close { background: none; border: none; color: var(--text2); font-size: 20px; cursor: pointer; padding: 4px; line-height: 1; }
+  .chat-close:hover { color: var(--accent); }
+  .chat-body { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .chat-message { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.55; animation: messageIn .3s ease-out; }
+  @keyframes messageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .chat-message.bot { background: var(--bg3); color: var(--text); border-bottom-left-radius: 4px; align-self: flex-start; }
+  .chat-message.user { background: var(--accent); color: var(--white); border-bottom-right-radius: 4px; align-self: flex-end; }
+  .chat-message.typing { background: var(--bg3); padding: 16px 20px; }
+  .typing-dots { display: flex; gap: 4px; }
+  .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--text2); animation: typingBounce 1.4s ease-in-out infinite; }
+  .typing-dots span:nth-child(2) { animation-delay: .2s; }
+  .typing-dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+  .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 12px; }
+  .chat-suggestion { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all .2s; white-space: nowrap; }
+  .chat-suggestion:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,59,59,.05); }
+  .chat-input-area { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+  .chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 8px 16px; font-size: 13px; color: var(--text); outline: none; font-family: inherit; }
+  .chat-input:focus { border-color: var(--accent); }
+  .chat-input::placeholder { color: var(--text3); }
+  .chat-send { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); border: none; color: var(--white); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
+  .chat-send:hover { background: var(--accent2); transform: scale(1.05); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 64px 24px; }
+    .work-item { grid-template-columns: 1fr; gap: 8px; }
+    .work-location { text-align: left; }
+    .constellation-wrap { height: 400px; }
+    .chat-panel { width: calc(100vw - 48px); }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <!-- <a href="/" class="logo-link">
-        <img src="image/portfolio website logo.png" alt="Website Logo" class="logo">
-      </a> -->
-      <!-- <h1 data-en="Kelly Liu" data-zh="刘成彦">Kelly Liu</h1>
-      <h3>Aspiring Data, Analytics, and AI Roles</h3> -->
-      <!-- <div class="language-switcher">
-        <button onclick="switchLanguage('en')">English</button>
-        <button onclick="switchLanguage('zh')">中文</button>
-      </div> -->
-      <nav class="header-nav">
-        <ul>
-          <li><a href="#home">About Me</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#resume">Resume</a></li> 
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="container">
-        <!-- About Me and Image Section -->
-        <div class="hero-content">
-          <div class="hero-text">
-            <h2 data-en="Hey, I am Chengyan, also known by Kelly." data-zh="你好，我是Kelly。">Hey, I am Chengyan, also known by Kelly.</h2>
-            <h3 data-en="I am an AI Solution Architect with diverse expertise and industry experience." data-zh="我是一名具有多样专业知识和行业经验的AI解决方案架构师.">
-              I am an AI Solution Architect with diverse expertise and industry experience.
-            </h3>
-            <p data-en="With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project. I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries." data-zh="凭借AI和数据分析的坚实背景，我专注于为复杂的工业问题创造创新解决方案。我的经验涵盖多个行业，使我能够为每个项目带来独特的视角。我热衷于利用尖端的AI技术来提高效率，降低成本，并改善各行业的结果。">
-              With a strong background in AI and data analytics, I specialize in creating innovative solutions for complex industrial problems. My experience spans multiple sectors, allowing me to bring a unique perspective to each project. I'm passionate about leveraging cutting-edge AI technologies to drive efficiency, reduce costs, and improve outcomes across various industries.
-            </p>
-          </div>
-          <div class="hero-image">
-            <img src="image/headshot.jpg" alt="Kelly's professional headshot">
-          </div>
-        </div>
-    
-        <!-- Education Section -->
-        <div class="education-skills">
-          <h2 data-en="Education" data-zh="教育背景">Education</h2>
-          <ul>
-            <li>
-              <p data-en="Business Technology Management, Computer Science, and Data Analytics" data-zh="商业技术管理、计算机科学和数据分析">
-                Business Technology Management, Computer Science, and Data Analytics
-              </p>
-            </li>
-          </ul>
-        </div>
-    
-        <!-- Skills Section -->
-        <div class="education-skills">
-          <h2 data-en="Skills" data-zh="技能">Skills</h2>
-          <ul>
-            <li>
-              <p data-en="<strong>Industries:</strong> Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation" data-zh="<strong>行业：</strong>能源，工业自动化，制药，精密电子，交通">
-                <strong>Industries:</strong> Energy, Industrial Automation, Pharmaceutical, Precision Electronics, Transportation
-              </p>
-            </li>
-            <li>
-              <p data-en="<strong>Office:</strong> MS Office, Visio, Project, SharePoint, Jira, Confluence, Notion" data-zh="<strong>办公软件：</strong>微软Office, Visio, Project, SharePoint, Jira, Confluence, Notion">
-                <strong>Office:</strong> MS Office, Visio, Project, SharePoint, Jira, Confluence, Notion
-              </p>
-            </li>
-            <li>
-              <p data-en="<strong>Big Data:</strong>" data-zh="<strong>大数据：</strong>">
-                <strong>Big Data:</strong>
-              </p>
-              <ul>
-                <li>
-                  <p data-en="<strong>Programming Languages:</strong> Python, SQL, R, SAS" data-zh="<strong>编程语言：</strong> Python, SQL, R, SAS">
-                    <strong>Programming Languages:</strong> Python, SQL, R, SAS
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>Machine Learning:</strong> Scikit-learn, SciPy, PyTorch, TensorFlow" data-zh="<strong>机器学习：</strong> Scikit-learn, SciPy, PyTorch, TensorFlow">
-                    <strong>Machine Learning:</strong> Scikit-learn, SciPy, PyTorch, TensorFlow
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>NLP:</strong> nltk, SpaCy, Vader, Text2vec, BERTopic" data-zh="<strong>自然语言处理：</strong> nltk, SpaCy, Vader, Text2vec, BERTopic">
-                    <strong>NLP:</strong> nltk, SpaCy, Vader, Text2vec, BERTopic
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>GenAI:</strong> LLM, Diffusion, GPT4-v, Qwen" data-zh="<strong>生成型人工智能：</strong> LLM, Diffusion, GPT4-v, 通义千问">
-                    <strong>GenAI:</strong> LLM, Diffusion, GPT4-v, Qwen
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>Cloud Services:</strong> Azure, AWS, Alibaba" data-zh="<strong>云服务：</strong> Azure, AWS, 阿里云">
-                    <strong>Cloud Services:</strong> Azure, AWS, Alibaba
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>Data Visualization:</strong> PowerBI, Access, Tableau, Excel" data-zh="<strong>数据可视化：</strong> PowerBI, Access, Tableau, Excel">
-                    <strong>Data Visualization:</strong> PowerBI, Access, Tableau, Excel
-                  </p>
-                </li>
-                <li>
-                  <p data-en="<strong>Data Management:</strong> Lakehouse, Databricks, Arcteryx, Informatica, IBM COGNOS, IBM Netezza, GraphDB, VectorDB" data-zh="<strong>数据管理：</strong> Lakehouse, Databricks, Arcteryx, Informatica, IBM COGNOS, IBM Netezza, GraphDB, VectorDB">
-                    <strong>Data Management:</strong> Lakehouse, Databricks, Arcteryx, Informatica, IBM COGNOS, IBM Netezza, GraphDB, VectorDB
-                  </p>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <p data-en="<strong>Development:</strong> Java, Web Frontend, UI & UX Design, Project Management, Solution Architecture Design" data-zh="<strong>开发：</strong>Java, Web 前端, UI & UX 设计, 项目管理, 解决方案架构设计">
-                <strong>Development:</strong> Java, Web Frontend, UI & UX Design, Project Management, Solution Architecture Design
-              </p>
-            </li>
-          </ul>
+<!-- ANIMATED MESH BG -->
+<div class="mesh-bg">
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Kelly <span>Liu</span></div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#now">Now</a></li>
+    <li><a href="mailto:chengyan.liu@mail.mcgill.ca" style="color:var(--accent)">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="line"></div>
+      <span>AI Engineer · Beijing, China</span>
+    </div>
+    <div class="hero-name">
+      Kelly
+      <span class="underline">Liu.</span>
+    </div>
+    <div class="typewriter-container">
+      <div class="typewriter-prompt">
+        <div class="typewriter-prompt-icon">AI</div>
+        <span class="typewriter-prompt-label">What's your story?</span>
+      </div>
+      <div class="typewriter-text" id="typewriter"></div>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">Currently</span>
+        <span class="value">Schneider Electric</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Education</span>
+        <span class="value">McGill MMA · Concordia</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Based in</span>
+        <span class="value">Beijing 🇨🇳</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Languages</span>
+        <span class="value">EN · 中文</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#work">See My Work</a>
+      <a class="btn btn-ghost" href="https://github.com/CLIUKELLY" target="_blank">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Work</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="work-list">
+
+    <div class="work-item">
+      <div class="work-period">2024 — Present</div>
+      <div>
+        <div class="work-company">Schneider Electric</div>
+        <div class="work-role">AI Algorithm Engineer</div>
+        <div class="work-desc">
+          Led <strong>10+ AI projects</strong> in energy management and industrial automation. Achieved <strong>5–10% annual energy savings</strong>. Built an internal SaaS tool powered by LLMs. Represented Schneider at the <strong>2024 World AI Conference</strong> in Shanghai.
         </div>
       </div>
-    </section>
+      <div class="work-location">Beijing, China</div>
+    </div>
 
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 data-en="Projects" data-zh="项目">Projects</h2>
-        <p>Below is a list of projects I have completed independently or as part of a group. To explore more details about each project, simply click the button provided. </p>
-        <div class="projects">
-          <div class="project">
-            <img src="image/project1.jpg" alt="Project 1: Automobile Risk Analysis" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Automobile Risk Analysis" data-zh="机动车风险分析">Automobile Risk Analysis</h3>
-              <p data-en="Conducted insurance risk analysis using PCA and Random Forest models with R and vehicle data, providing 
-              driving and purchasing recommendations to stakeholders." data-zh="运用PCA和随机森林模型，使用R语言和汽车数据进行机动车保险风险分析，为利益相关者提供驾驶及购车建议。">Conducted insurance risk analysis using PCA and Random Forest models with R and vehicle data, providing 
-              driving and purchasing recommendations to stakeholders.</p>
-              <a href="https://github.com/CLIUKELLY/Automobile-Risk-Analysis" target="_blank">
-                <button type="button">View Details on GitHub</button>
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <img src="image/project2.jpg" alt="Project 2: Customer Personality Analysis" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Customer Personality Analysis" data-zh="店铺顾客分析">Customer Personality Analysis</h3>
-              <p data-en="Applied clustering and causal inference on customer data for segmentation and determining variable causality, 
-              enhancing marketing strategies." data-zh="利用聚类算法、因果推断，分析顾客人口及行为信息，进行顾客细分并确认变量之间因果关系，帮助制定更好的营销计划。">Applied clustering and causal inference on customer data for segmentation and determining variable causality, 
-              enhancing marketing strategies.</p>
-              <a href="https://github.com/CLIUKELLY/Customer-Personality-Analysis-2.0" target="_blank">
-                <button type="button">View Details on GitHub</button>
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <img src="image/project3.jpg" alt="Project 3: Party Animal Steam Game Feedback Analysis" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Party Animal Steam Game Feedback Analysis" data-zh="Steam游戏《猛兽派对》用户反馈分析">Party Animal Steam Game Feedback Analysis</h3>
-              <p data-en="Analyzed game reviews using NLP and sentiment analysis to support investment strategy optimization." data-zh="对Steam游戏《猛兽派对》的评论进行了文本处理、情感分析和特征分析，深入挖掘了市场评价和用户需求，为五源资本提供了数据支持，以优化
-              其投资策略。">Analyzed game reviews using NLP and sentiment analysis to support investment strategy optimization.</p>
-              <a href="https://github.com/CLIUKELLY/Text-Analysis" target="_blank">
-                <button type="button">View Details on GitHub</button>
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <img src="image/project4.jpg" alt="Project 4: Starbucks Promotional Strategy Analysis" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Starbucks Promotional Strategy Analysis" data-zh="星巴克顾客行为分析">Starbucks Promotional Strategy Analysis</h3>
-              <p data-en="Utilized data mining and visualization techniques using Python, analyzed Starbucks consumer behavior and made 
-              prediction on offer completion, optimizing promotional strategies to enhanced customer engagement and 
-              contributed to revenue growth." data-zh="运用Python进行数据挖掘和可视化，使用机器学习及行销漏斗模型，分析星巴克的消费者行为，优化了推广策略，提升了客户参与度，并促进了
-              收入增长。">Utilized data mining and visualization techniques using Python, analyzed Starbucks consumer behavior and made 
-              prediction on offer completion, optimizing promotional strategies to enhanced customer engagement and 
-              contributed to revenue growth.</p>
-              <a href="https://github.com/CLIUKELLY/Starbucks-Customer-Analysis" target="_blank">
-                <button type="button">View Details on GitHub</button>
-              </a>
-            </div>
-          </div>
-          <div class="project">
-            <img src="image/project5.jpg" alt="Project 5: Covid-19 Database and Alerting System" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Covid-19 Database and Alerting System" data-zh="新冠确诊病例跟踪查询数据库系统">Covid-19 Database and Alerting System</h3>
-              <p data-en="Designed  and developed  a database and alerting system  with SQL  that records PCR test positive patients  and 
-              close contacts data by traßcking and alerting on positive cases for public health safety management." data-zh="使用MySQL开发新冠确诊病例跟踪查询数据库系统。">Designed  and developed  a database and alerting system  with SQL  that records PCR test positive patients  and 
-                close contacts data by tracking and alerting on positive cases for public health safety management.</p>
-                <a href="https://github.com/CLIUKELLY/COVID-19-Alerting-System" target="_blank">
-                  <button type="button">View Details on GitHub</button>
-                </a>
-            </div>
-          </div>
-          <div class="project">
-            <img src="image/project6.jpg" alt="Project 6: Herbicide Usage Optimization Project" width="300" height="200">
-            <div class="project-info">
-              <h3 data-en="Herbicide Usage Optimization Project" data-zh="除草剂用量优化项目">Herbicide Usage Optimization Project</h3>
-              <p data-en="Achieved a reduction in cancer risk-associated herbicide usage by applying combination of mathematical 
-              modelling and optimization techniques, successfully upholding crop production and cost targets within treatment 
-              method constraints." data-zh="通过综合应用数学建模和优化技术，减少了与癌症风险相关的除草剂用量，在限制范围内成功实现了作物产量和成本目标。">Achieved a reduction in cancer risk-associated herbicide usage by applying combination of mathematical 
-              modelling and optimization techniques, successfully upholding crop production and cost targets within treatment 
-              method constraints.</p>
-              <a href="https://github.com/yiyiyang81/Herbicide-Optimization" target="_blank">
-                <button type="button">View Details on GitHub</button>
-              </a>
-            </div>
-          </div>
+    <div class="work-item">
+      <div class="work-period">2021 — 2022</div>
+      <div>
+        <div class="work-company">Foxconn</div>
+        <div class="work-role">Technical Project Manager</div>
+        <div class="work-desc">
+          Manufacturer for <strong>Apple MacBook</strong>. Led data-driven failure analysis during New Product Introduction — improved process efficiency by <strong>over 50%</strong>. <strong>Saved millions USD</strong> by optimizing warehouse stacking vs. new production line investment.
         </div>
       </div>
-    </section>
-
-      <!-- Resume Section -->
-  <section id="resume" class="resume">
-    <div class="container">
-      <h2>Download My Resume</h2>
-      <p>You can download my resume by clicking the button below.</p>
-      <a href="resume/Resume_Kelly_Liu_McGill_MMA_AI.pdf" target="_blank" class="resume-download">
-        <button type="button" class="resume-button">Download Resume (EN)</button>
-      </a>
-      <!-- <a href="resume/刘成彦_商业分析_硕士_麦吉尔大学(QS Top 30).pdf" target="_blank" class="resume-download">
-        <button type="button" class="resume-button">下载简历 (ZH)</button>
-      </a> -->
+      <div class="work-location">Chengdu, China</div>
     </div>
-  </section>
 
-    <section id="contact" class="section">
-      <div class="container">
-        <h2 data-en="Contact" data-zh="联系">Contact</h2>
-        <p data-en="Interested in collaborating or learning more about my work? Feel free to reach out!" data-zh="有兴趣合作或了解更多关于我的工作？随时联系我！">Interested in collaborating or learning more about my work? Feel free to reach out!</p>
-        <div class="contact-info">
-          <ul>
-            <li><p data-en="Contact Information" data-zh="联络信息">Contact Information</p></li>
-            <li>Email: <a href="mailto:chengyan.liu@mail.mcgill.ca">chengyan.liu@mail.mcgill.ca</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank">linkedin.com/in/kelly-chengyan-liu</a></li>
-            <li>GitHub: <a href="https://github.com/CLIUKELLY" target="_blank">github.com/CLIUKELLY</a></li>
-          </ul>
+    <div class="work-item">
+      <div class="work-period">2018 — 2020</div>
+      <div>
+        <div class="work-company">Novartis</div>
+        <div class="work-role">Commercial Business Analyst</div>
+        <div class="work-desc">
+          Supported <strong>3 new drug launches</strong>. Built forecasting models and multi-source dashboards — contributed to market share gains and revenue growth.
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      <p data-en="© 2024 Kelly's AI Solutions Portfolio. All rights reserved." data-zh="© 2024 Kelly's AI解决方案组合。版权所有。">© 2024 Kelly's AI Solutions Portfolio. All rights reserved.</p>
+      <div class="work-location">Montreal, Canada</div>
     </div>
-  </footer>
 
-  <!-- <script>
-    function switchLanguage(lang) {
-      document.querySelectorAll('[data-en]').forEach(el => {
-        el.innerHTML = el.getAttribute('data-' + lang);
-      });
-    }
-  </script> -->
-</body>
-</html>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-award">🥈 2nd Place · $3,000</div>
+      <div class="project-title">ALDO GenAI Hackathon</div>
+      <div class="project-desc">AI self-serve tool for ALDO store managers. Team Fractals. 38 teams; presented to CEO David Bensadoun. McGill × AWS.</div>
+      <div class="project-tags">
+        <span class="project-tag">GenAI</span>
+        <span class="project-tag">AWS</span>
+        <span class="project-tag">Retail</span>
+        <span class="project-tag">Oct 2024</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-award">📦 Client Project</div>
+      <div class="project-title">CN Rail — GenAI Classification</div>
+      <div class="project-desc">GenAI automated classification POC. <strong>50% cost reduction</strong>. Fuel efficiency analysis — break-even Year 3, CAD $1,654 cumulative savings.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">VectorDB</span>
+        <span class="project-tag">Azure</span>
+        <span class="project-tag">PowerBI</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-award">🩹 Personal</div>
+      <div class="project-title">ACL-Patch</div>
+      <div class="project-desc">Real-time knee biomechanics tracker using MediaPipe + OpenCV. Built pre-op for my own ACL surgery.</div>
+      <div class="project-tags">
+        <span class="project-tag">Streamlit</span>
+        <span class="project-tag">MediaPipe</span>
+        <span class="project-tag">OpenCV</span>
+      </div>
+      <a class="project-link" href="https://github.com/CLIUKELLY/ACL-Patch" target="_blank">View on GitHub ↗</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-award">🚗 Analytics</div>
+      <div class="project-title">Canadian Car Sales Forecasting</div>
+      <div class="project-desc">Time-series forecasting on Canadian automotive sales using ARIMA and ML models. End-to-end in Jupyter.</div>
+      <div class="project-tags">
+        <span class="project-tag">Python</span>
+        <span class="project-tag">ARIMA</span>
+        <span class="project-tag">Forecasting</span>
+      </div>
+      <a class="project-link" href="https://github.com/CLIUKELLY/Canadian-Car-Sales-Forecasting" target="_blank">View on GitHub ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS CONSTELLATION -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="constellation-wrap">
+    <canvas class="constellation-canvas" id="constellation"></canvas>
+    <div class="constellation-overlay">
+      <div class="constellation-hint">Drag to explore · Hover nodes</div>
+      <div class="constellation-legend">
+        <div class="constellation-legend-item"><div class="constellation-legend-dot red"></div>Core skill</div>
+        <div class="constellation-legend-item"><div class="constellation-legend-dot gray"></div>Related tool</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Writing</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="writing-list">
+
+    <div class="writing-item">
+      <div class="writing-num">01</div>
+      <div>
+        <div class="writing-title">Why GenAI POCs fail in heavy industry (and how CN Rail was different)</div>
+        <div class="writing-sub">The gap between a demo and a production system — from someone who's bridged it.</div>
+      </div>
+      <span class="writing-coming">Coming soon</span>
+    </div>
+
+    <div class="writing-item">
+      <div class="writing-num">02</div>
+      <div>
+        <div class="writing-title">What 5–10% energy savings actually looks like with AI</div>
+        <div class="writing-sub">Real numbers from real industrial deployments at Schneider Electric.</div>
+      </div>
+      <span class="writing-coming">Coming soon</span>
+    </div>
+
+    <div class="writing-item">
+      <div class="writing-num">03</div>
+      <div>
+        <div class="writing-title">I built a computer vision app in 3 days before my ACL surgery</div>
+        <div class="writing-sub">A walkthrough of ACL-Patch — and what MediaPipe taught me about fast prototyping.</div>
+      </div>
+      <span class="writing-coming">Coming soon</span>
+    </div>
+
+    <div class="writing-item">
+      <div class="writing-num">04</div>
+      <div>
+        <div class="writing-title">The Foxconn to McGill to Schneider arc — building a career across two countries</div>
+        <div class="writing-sub">On moving between Montreal and Beijing, and why the hybrid path is worth it.</div>
+      </div>
+      <span class="writing-coming">Coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Now</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="now-grid">
+
+    <div class="now-card">
+      <span class="now-icon">⚡</span>
+      <div class="now-label">Day Job</div>
+      <div class="now-text">At <strong>Schneider Electric in Beijing</strong> — deploying AI for energy management and industrial automation. Bridging Chinese and international teams.</div>
+    </div>
+
+    <div class="now-card">
+      <span class="now-icon">🦵</span>
+      <div class="now-label">Recovery</div>
+      <div class="now-text">Post-ACL surgery (Jan 31, 2026). Doing the physio, tracking angles with my own app. Slowly getting back to <strong>MMA and the gym</strong>.</div>
+    </div>
+
+    <div class="now-card">
+      <span class="now-icon">📈</span>
+      <div class="now-label">Investing</div>
+      <div class="now-text">Actively investing in <strong>stocks and ETFs</strong>. Learning the markets while figuring out where the world is heading.</div>
+    </div>
+
+    <div class="now-card">
+      <span class="now-icon">🛠️</span>
+      <div class="now-label">Building (Soon)</div>
+      <div class="now-text">Indie hacking is on the roadmap. I have the tools, the domain knowledge, and the itch. <strong>The product idea is forming.</strong></div>
+    </div>
+
+  </div>
+  <p style="font-size:12px;color:var(--text3);margin-top:24px;">Last updated: April 2026</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Kelly Liu © 2026</div>
+  <ul class="footer-links">
+    <li><a href="https://github.com/CLIUKELLY" target="_blank">GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank">LinkedIn</a></li>
+    <li><a href="mailto:chengyan.liu@mail.mcgill.ca">Email</a></li>
+  </ul>
+  <div class="footer-copy">Beijing · Montreal · Built with intent.</div>
+</footer>
+
+<!-- CHAT WIDGET -->
+<div class="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar">K</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Ask Kelly</div>
+        <div class="chat-header-status"><span class="chat-header-status-dot"></span>Online now</div>
+      </div>
+      <button class="chat-close" id="chatClose">×</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-suggestions" id="chatSuggestions"></div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." />
+      <button class="chat-send" id="chatSend">→</button>
+    </div>
+  </div>
+  <button class="chat-toggle" id="chatToggle">💬</button>
+</div>
 
 <script>
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".header-nav a");
+// ── TYPEWRITER ──
+const typewriter = document.getElementById('typewriter');
+const lines = [
+  "I build <strong>AI that works in the real world</strong> — not just demos. Energy grids, factory floors, supply chains.",
+  "Former Foxconn PM. McGill analytics. Currently at <strong>Schneider Electric</strong>, rehabbing an ACL, and plotting what's next.",
+  "I ship code when I face real problems — like <strong>ACL-Patch</strong>, a computer vision tracker I built before my own surgery."
+];
+let lineIndex = 0, charIndex = 0, isDeleting = false;
 
-  window.addEventListener("scroll", () => {
-    let current = "";
+function type() {
+  const currentLine = lines[lineIndex];
+  if (!isDeleting && charIndex < currentLine.length) {
+    typewriter.innerHTML = currentLine.substring(0, charIndex + 1) + '<span class="typewriter-cursor"></span>';
+    charIndex++;
+    setTimeout(type, 40 + Math.random() * 30);
+  } else if (isDeleting && charIndex > 0) {
+    typewriter.innerHTML = currentLine.substring(0, charIndex - 1) + '<span class="typewriter-cursor"></span>';
+    charIndex--;
+    setTimeout(type, 20);
+  } else {
+    if (!isDeleting) {
+      setTimeout(() => { isDeleting = true; type(); }, 3000);
+    } else {
+      isDeleting = false;
+      lineIndex = (lineIndex + 1) % lines.length;
+      setTimeout(type, 500);
+    }
+  }
+}
+setTimeout(type, 800);
 
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      if (pageYOffset >= sectionTop - 60) {
-        current = section.getAttribute("id");
-      }
-    });
+// ── CONSTELLATION ──
+const canvas = document.getElementById('constellation');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+resize();
+window.addEventListener('resize', resize);
 
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href").includes(current)) {
-        link.classList.add("active");
-      }
-    });
+const nodes = [
+  { x: .5, y: .45, label: "GenAI", core: true, r: 18 },
+  { x: .35, y: .3, label: "RAG", core: true, r: 14 },
+  { x: .65, y: .3, label: "LLMOps", core: true, r: 14 },
+  { x: .25, y: .55, label: "Python", core: true, r: 16 },
+  { x: .75, y: .55, label: "Azure", core: true, r: 15 },
+  { x: .5, y: .2, label: "LangChain", core: false, r: 11 },
+  { x: .25, y: .2, label: "VectorDB", core: false, r: 11 },
+  { x: .75, y: .2, label: "Bedrock", core: false, r: 11 },
+  { x: .15, y: .4, label: "Pandas", core: false, r: 10 },
+  { x: .35, y: .7, label: "PyTorch", core: false, r: 12 },
+  { x: .65, y: .7, label: "TensorFlow", core: false, r: 12 },
+  { x: .85, y: .4, label: "Databricks", core: false, r: 12 },
+  { x: .5, y: .75, label: "Gurobi", core: false, r: 10 },
+  { x: .15, y: .65, label: "SQL", core: false, r: 10 },
+  { x: .85, y: .65, label: "Docker", core: false, r: 10 },
+  { x: .4, y: .5, label: "scikit-learn", core: false, r: 10 },
+  { x: .6, y: .5, label: "XGBoost", core: false, r: 10 },
+  { x: .5, y: .6, label: "PowerBI", core: false, r: 10 },
+  { x: .3, y: .8, label: "R", core: false, r: 9 },
+  { x: .7, y: .8, label: "CI/CD", core: false, r: 9 },
+  { x: .2, y: .35, label: "NLP", core: false, r: 10 },
+  { x: .8, y: .35, label: "Figma", core: false, r: 9 }
+];
+
+const edges = [
+  [0,5],[0,6],[0,7],[0,1],[0,2],[0,3],[0,4],[0,16],[0,17],
+  [1,6],[1,5],[2,7],[2,5],[3,8],[3,13],[3,16],[3,14],
+  [4,11],[4,14],[4,7],[5,6],[5,7],[8,13],[8,20],
+  [9,10],[9,12],[10,12],[11,14],[16,17],[17,18],[19,14],[20,8]
+];
+
+let scaleNodes = nodes.map(n => ({ ...n, x: n.x * W, y: n.y * H }));
+let mouse = { x: -1000, y: -1000 }, dragging = null, dragOffset = { x: 0, y: 0 };
+
+function drawConstellation() {
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = '#222'; ctx.lineWidth = 1;
+  edges.forEach(([a, b]) => {
+    const na = scaleNodes[a], nb = scaleNodes[b];
+    const dist = Math.hypot(na.x - nb.x, na.y - nb.y);
+    if (dist < 250) { ctx.globalAlpha = 1 - dist / 250; ctx.beginPath(); ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y); ctx.stroke(); }
   });
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      document.querySelector(link.getAttribute("href")).scrollIntoView({
-        behavior: "smooth"
+  ctx.globalAlpha = 1;
+  scaleNodes.forEach(n => {
+    const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 2);
+    grad.addColorStop(0, n.core ? 'rgba(255,59,59,0.3)' : 'rgba(136,136,136,0.15)');
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = n.core ? '#FF3B3B' : '#444'; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
+    const dx = mouse.x - n.x, dy = mouse.y - n.y;
+    if (Math.hypot(dx, dy) < n.r + 5) {
+      ctx.strokeStyle = '#FF3B3B'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 4, 0, Math.PI * 2); ctx.stroke();
+      ctx.strokeStyle = 'rgba(255,59,59,0.4)'; ctx.lineWidth = 1.5;
+      edges.forEach(([a, b]) => {
+        if (a === nodes.indexOf(n) || b === nodes.indexOf(n)) {
+          ctx.beginPath(); ctx.moveTo(scaleNodes[a].x, scaleNodes[a].y); ctx.lineTo(scaleNodes[b].x, scaleNodes[b].y); ctx.stroke();
+        }
       });
-    });
+      ctx.fillStyle = 'rgba(26,26,26,0.95)'; ctx.fillRect(n.x + 15, n.y - 30, ctx.measureText(n.label).width + 20, 26);
+      ctx.fillStyle = n.core ? '#FF3B3B' : '#888'; ctx.font = 'bold 12px sans-serif'; ctx.fillText(n.label, n.x + 25, n.y - 14);
+    }
+    ctx.fillStyle = n.core ? '#AAA' : '#555'; ctx.font = n.core ? 'bold 11px sans-serif' : '11px sans-serif';
+    const tw = ctx.measureText(n.label).width; ctx.fillText(n.label, n.x - tw/2, n.y + n.r + 14);
   });
+  requestAnimationFrame(drawConstellation);
+}
+
+canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+canvas.addEventListener('mousedown', e => { const r = canvas.getBoundingClientRect(); const mx = e.clientX - r.left, my = e.clientY - r.top; scaleNodes.forEach((n, i) => { if (Math.hypot(mx - n.x, my - n.y) < n.r + 5) { dragging = i; dragOffset = { x: mx - n.x, y: my - n.y }; } }); });
+window.addEventListener('mousemove', e => { if (dragging !== null) { const r = canvas.getBoundingClientRect(); scaleNodes[dragging].x = e.clientX - r.left - dragOffset.x; scaleNodes[dragging].y = e.clientY - r.top - dragOffset.y; } });
+window.addEventListener('mouseup', () => { dragging = null; });
+drawConstellation();
+
+// ── CHAT WIDGET (loads from external .txt file) ──
+const chatToggle = document.getElementById('chatToggle');
+const chatPanel = document.getElementById('chatPanel');
+const chatClose = document.getElementById('chatClose');
+const chatBody = document.getElementById('chatBody');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatSuggestions = document.getElementById('chatSuggestions');
+
+let chatKB = {};
+
+// Load knowledge base from external file
+async function loadChatKB() {
+  try {
+    const resp = await fetch('kelly-chat-kb.txt');
+    const text = await resp.text();
+    const sections = text.split(/\n\[(.+?)\]\n/);
+    for (let i = 1; i < sections.length; i += 2) {
+      chatKB[sections[i].toLowerCase()] = sections[i + 1].trim();
+    }
+  } catch (e) {
+    console.error('Failed to load chat KB:', e);
+    chatKB = {
+      background: "I'm Kelly — an AI Engineer at Schneider Electric. Ask me about my work, projects, or how to reach me.",
+      default: "I build AI systems for real industrial problems. Ask me about my work at Schneider, Foxconn, or my GenAI projects."
+    };
+  }
+}
+loadChatKB();
+
+function addMessage(text, isUser) {
+  const msg = document.createElement('div');
+  msg.className = `chat-message ${isUser ? 'user' : 'bot'}`;
+  msg.innerHTML = text;
+  chatBody.appendChild(msg);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function showTyping(callback) {
+  const typing = document.createElement('div');
+  typing.className = 'chat-message typing';
+  typing.id = 'typingIndicator';
+  typing.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  chatBody.appendChild(typing);
+  chatBody.scrollTop = chatBody.scrollHeight;
+  setTimeout(() => {
+    const ind = document.getElementById('typingIndicator');
+    if (ind) ind.remove();
+    callback();
+  }, 800 + Math.random() * 600);
+}
+
+function respond(text) {
+  const lower = text.toLowerCase();
+  let response = chatKB.default || "I build AI systems for real industrial problems. Ask me about my work, projects, or how to reach me.";
+  
+  // Simple keyword matching against KB keys
+  for (const [key, value] of Object.entries(chatKB)) {
+    if (key === 'default') continue;
+    if (lower.includes(key)) { response = value; break; }
+  }
+  // Fallback keyword matching
+  if (response === chatKB.default) {
+    if (lower.includes('who') || lower.includes('background') || lower.includes('about you')) response = chatKB.background || response;
+    else if (lower.includes('work') || lower.includes('job') || lower.includes('experience') || lower.includes('career')) response = chatKB.experience || response;
+    else if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('tool')) response = chatKB.skills || response;
+    else if (lower.includes('contact') || lower.includes('email') || lower.includes('reach') || lower.includes('find you')) response = chatKB.contact || response;
+    else if (lower.includes('hire') || lower.includes('open') || lower.includes('available') || lower.includes('freelance')) response = chatKB.hire || response;
+    else if (lower.includes('project')) response = chatKB.projects || response;
+    else if (lower.includes('school') || lower.includes('education') || lower.includes('degree') || lower.includes('mcgill') || lower.includes('concordia')) response = chatKB.education || response;
+    else if (lower.includes('hobby') || lower.includes('mma') || lower.includes('fight') || lower.includes('invest')) response = chatKB.hobbies || response;
+  }
+  
+  showTyping(() => addMessage(response.replace(/\n/g, '<br>'), false));
+}
+
+function updateSuggestions() {
+  const suggestions = ['Background?', 'Experience?', 'Skills?', 'Projects?', 'Contact?', 'Hire you?'];
+  chatSuggestions.innerHTML = '';
+  suggestions.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'chat-suggestion';
+    btn.textContent = s;
+    btn.onclick = () => { addMessage(s, true); respond(s); };
+    chatSuggestions.appendChild(btn);
+  });
+}
+
+chatToggle.addEventListener('click', () => {
+  chatPanel.classList.toggle('open');
+  chatToggle.classList.toggle('active');
+  if (chatPanel.classList.contains('open') && chatBody.children.length === 0) {
+    setTimeout(() => {
+      addMessage("Hi! I'm Kelly. Ask me anything about my work, projects, or background.", false);
+      updateSuggestions();
+    }, 400);
+  }
+});
+
+chatClose.addEventListener('click', () => {
+  chatPanel.classList.remove('open');
+  chatToggle.classList.remove('active');
+});
+
+function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  addMessage(text, true);
+  chatInput.value = '';
+  respond(text);
+}
+
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 </script>
+
+</body>
+</html>
