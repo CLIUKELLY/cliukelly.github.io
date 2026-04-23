@@ -1,0 +1,37 @@
+[background]
+I'm Kelly Chengyan Liu — an AI Algorithm Engineer at Schneider Electric in Beijing. Before Schneider, I was a Technical Project Manager at Foxconn working on Apple MacBook New Product Introduction, and a Commercial Business Analyst Intern at Novartis supporting 3 drug launches. I have a Master of Management in Analytics from McGill University and a BComm from Concordia. Fluent in English and Mandarin.
+
+[experience]
+• Schneider Electric (2024–Present): Led 10+ AI projects in energy and industrial automation. Achieved 5–10% annual energy savings for clients. Built an internal SaaS tool powered by LLMs. Represented Schneider at the 2024 World AI Conference in Shanghai.
+• Foxconn (2021–2022): Technical PM on Apple MacBook NPI. Improved process efficiency by over 50%. Saved millions USD by optimizing warehouse stacking vs. investing in a new production line.
+• Novartis (2018–2020): Supported 3 new drug launches. Built forecasting models and dashboards that contributed to market share gains and revenue growth.
+
+[skills]
+Core: GenAI (LangChain, RAG, LLMOps), Python, Azure, AWS (Bedrock), Databricks, PyTorch, TensorFlow, XGBoost, Gurobi, Docker, CI/CD.
+Data: Pandas, scikit-learn, SQL, R, PowerBI, Tableau.
+Also: NLP (NLTK, SpaCy, BERTopic), Figma, Agile/Scrum, UI/UX design.
+
+[projects]
+• ALDO GenAI Hackathon: 2nd place ($3K). AI self-serve tool for store managers. Team Fractals, 38 teams. Presented to CEO David Bensadoun.
+• CN Rail GenAI Classification: 50% cost reduction POC. Train fuel efficiency analysis — break-even Year 3, CAD $1,654 cumulative savings.
+• ACL-Patch: Personal Streamlit app using MediaPipe + OpenCV for real-time knee angle tracking. Built pre-op for my own ACL surgery.
+• Canadian Car Sales Forecasting: Time-series forecasting with ARIMA and ML models.
+
+[contact]
+Email: chengyan.liu@mail.mcgill.ca
+LinkedIn: linkedin.com/in/kelly-chengyan-liu
+GitHub: github.com/CLIUKELLY
+Based in Beijing, China. Montreal number: +1 514 601 9723.
+
+[hire]
+I'm currently full-time at Schneider Electric in Beijing. Open to interesting conversations, advisory roles, and side projects — especially in GenAI, energy, industrial automation, or anything that bridges China and international markets.
+
+[education]
+• Master of Management in Analytics (MMA), McGill University — Concentration: ML & Optimization. GPA 3.58/4.00. Scholarship: $9,000.
+• BComm, Concordia University — Major: Business Technology Management, Minor: Computer Science. GPA 3.51/4.30.
+
+[hobbies]
+Mixed Martial Arts, fitness, indie hacking, investing in stocks and ETFs. Currently recovering from ACL surgery (Jan 31, 2026) and getting back into training.
+
+[default]
+I build AI systems for real industrial problems — not just demos. Ask me about my work at Schneider Electric, Foxconn, my GenAI projects, or how to reach me.
