@@ -1,10 +1,11 @@
 [background]
-I'm Kelly Chengyan Liu — an AI Algorithm Engineer at Schneider Electric in Beijing. Before Schneider, I was a Technical Project Manager at Foxconn working on Apple MacBook New Product Introduction, and a Commercial Business Analyst Intern at Novartis supporting 3 drug launches. I have a Master of Management in Analytics from McGill University and a BComm from Concordia. Fluent in English and Mandarin.
+I'm Kelly Chengyan Liu — an AI Solution Partner and Scrum Master at Schneider Electric in Beijing. I converted from AI Algorithm Engineer Intern into a broader delivery role. Before Schneider, I worked as a Data Solution Architect for CN (via McGill), a Design for Manufacturing Engineer at Foxconn, and a Commercial Business Analyst at Novartis. I have a Master of Management in Analytics from McGill University and a BComm from Concordia. Fluent in English and Mandarin.
 
 [experience]
-• Schneider Electric (2024–Present): Led 10+ AI projects in energy and industrial automation. Achieved 5–10% annual energy savings for clients. Built an internal SaaS tool powered by LLMs. Represented Schneider at the 2024 World AI Conference in Shanghai.
-• Foxconn (2021–2022): Technical PM on Apple MacBook NPI. Improved process efficiency by over 50%. Saved millions USD by optimizing warehouse stacking vs. investing in a new production line.
-• Novartis (2018–2020): Supported 3 new drug launches. Built forecasting models and dashboards that contributed to market share gains and revenue growth.
+• Schneider Electric (May 2024-Present): AI Solution Partner and Scrum Master. Converted from AI Algorithm Engineer Intern; managing development of internal AI solutions, leading cross-functional teams, and implementing external AI solutions for water, power, and brewing sectors. Mentoring internal AI contests and GO GREEN competition.
+• CN via McGill (Sep 2023-May 2024): Data Solution Architect. Delivered transformative data mining and analytics solutions in an academic consulting project; translated business requirements into technical data pipelines.
+• Foxconn (Jul 2021-Jul 2022): Design for Manufacturing Engineer. Led failure analysis and root cause identification on the production line; used operational and machine data to improve yield and process efficiency while supporting mass-production quality targets.
+• Novartis (Sep 2018-Jun 2020): Commercial Business Analyst. Built forecasting models and multi-source dashboards to support 3 new drug launches; streamlined scheduled reporting for clearer market-performance visibility.
 
 [skills]
 Core: GenAI (LangChain, RAG, LLMOps), Python, Azure, AWS (Bedrock), Databricks, PyTorch, TensorFlow, XGBoost, Gurobi, Docker, CI/CD.
@@ -12,10 +13,10 @@ Data: Pandas, scikit-learn, SQL, R, PowerBI, Tableau.
 Also: NLP (NLTK, SpaCy, BERTopic), Figma, Agile/Scrum, UI/UX design.
 
 [projects]
-• ALDO GenAI Hackathon: 2nd place ($3K). AI self-serve tool for store managers. Team Fractals, 38 teams. Presented to CEO David Bensadoun.
-• CN Rail GenAI Classification: 50% cost reduction POC. Train fuel efficiency analysis — break-even Year 3, CAD $1,654 cumulative savings.
-• ACL-Patch: Personal Streamlit app using MediaPipe + OpenCV for real-time knee angle tracking. Built pre-op for my own ACL surgery.
-• Canadian Car Sales Forecasting: Time-series forecasting with ARIMA and ML models.
+• ALDO GenAI Hackathon: 2nd place ($3K). I was the builder and model lead for an AI self-serve tool that supports data Q&A, data insights, and strategic decision suggestions for store management. Team Fractals, 38 teams. Presented to CEO David Bensadoun.
+• CN Rail GenAI Classification: 50% cost reduction POC. Train fuel efficiency analysis showing break-even by Year 3.
+• ACL-Patch: Passion project built pre-op for my ACL surgery to record rehab progress. Also a practical sandbox for computer vision image processing and exploring GenAI model ideas.
+• Canadian Car Sales Forecasting: End-to-end time-series forecasting example (ARIMA + ML) used to demonstrate my forecasting capability.
 
 [contact]
 Email: chengyan.liu@mail.mcgill.ca

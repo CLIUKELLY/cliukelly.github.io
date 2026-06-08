@@ -96,16 +96,46 @@
   .project-link { display: inline-block; margin-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
   .project-link:hover { color: var(--accent2); }
 
-  .constellation-wrap { position: relative; width: 100%; height: 600px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .skills-toolbar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+  .skills-chip-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .skills-chip { background: var(--bg2); border: 1px solid var(--border); color: var(--text2); padding: 7px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
+  .skills-chip:hover { border-color: var(--accent); color: var(--text); }
+  .skills-chip.active { background: rgba(255,59,59,.1); color: var(--accent); border-color: rgba(255,59,59,.45); }
+
+  .constellation-wrap { position: relative; width: 100%; height: 620px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .constellation-canvas { width: 100%; height: 100%; cursor: grab; }
   .constellation-canvas:active { cursor: grabbing; }
-  .constellation-overlay { position: absolute; bottom: 24px; left: 24px; pointer-events: none; }
+  .constellation-overlay { position: absolute; bottom: 24px; left: 24px; pointer-events: none; max-width: 58%; }
   .constellation-hint { font-size: 11px; color: var(--text3); letter-spacing: .05em; }
-  .constellation-legend { display: flex; gap: 16px; margin-top: 8px; }
+  .constellation-legend { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
   .constellation-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
   .constellation-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .constellation-legend-dot.red { background: var(--accent); }
-  .constellation-legend-dot.gray { background: var(--node2); }
+  .constellation-legend-dot.core { background: #FF3B3B; }
+  .constellation-legend-dot.domain { background: #FF8C00; }
+  .constellation-legend-dot.tool { background: #57C7FF; }
+  .constellation-legend-dot.proof { background: #8CE99A; }
+
+  .skill-panel {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 320px;
+    max-width: calc(100% - 32px);
+    background: rgba(15,15,15,.92);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    z-index: 2;
+    backdrop-filter: blur(8px);
+  }
+  .skill-panel-title { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+  .skill-panel-copy { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+  .skill-panel-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .skill-panel-pill { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--text2); border: 1px solid var(--border); border-radius: 999px; padding: 3px 8px; }
+  .skill-panel-subtitle { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin: 8px 0 4px; }
+  .skill-panel-list { font-size: 12px; color: var(--text); line-height: 1.55; }
+  .skill-panel-list a { color: var(--accent2); text-decoration: none; }
+  .skill-panel-list a:hover { color: var(--accent); }
 
   .writing-list { display: flex; flex-direction: column; gap: 0; }
   .writing-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 0 32px; align-items: center; padding: 28px 0; border-top: 1px solid var(--border); transition: padding-left .2s; }
@@ -176,7 +206,9 @@
     section { padding: 64px 24px; }
     .work-item { grid-template-columns: 1fr; gap: 8px; }
     .work-location { text-align: left; }
-    .constellation-wrap { height: 400px; }
+    .constellation-wrap { height: 520px; }
+    .constellation-overlay { max-width: 100%; left: 16px; bottom: 16px; }
+    .skill-panel { position: static; width: 100%; margin: 12px 0 0; }
     .chat-panel { width: calc(100vw - 48px); }
     footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
   }
@@ -209,7 +241,7 @@
   <div class="hero-inner">
     <div class="hero-eyebrow">
       <div class="line"></div>
-      <span>AI Engineer · Beijing, China</span>
+      <span>AI Solution Partner &amp; Scrum Master · Beijing, China</span>
     </div>
     <div class="hero-name">
       Kelly
@@ -261,21 +293,33 @@
       <div class="work-period">2024 — Present</div>
       <div>
         <div class="work-company">Schneider Electric</div>
-        <div class="work-role">AI Algorithm Engineer</div>
+        <div class="work-role">AI Solution Partner &amp; Scrum Master</div>
         <div class="work-desc">
-          Led <strong>10+ AI projects</strong> in energy management and industrial automation. Achieved <strong>5–10% annual energy savings</strong>. Built an internal SaaS tool powered by LLMs. Represented Schneider at the <strong>2024 World AI Conference</strong> in Shanghai.
+          Converted from AI Algorithm Engineer Intern to AI Solution Partner. Managing development of internal AI solutions, leading cross-functional teams, and implementing external AI solutions for <strong>water, power, and brewing sectors</strong>. Mentoring internal AI contests and the external <strong>GO GREEN</strong> competition.
         </div>
       </div>
       <div class="work-location">Beijing, China</div>
     </div>
 
     <div class="work-item">
+      <div class="work-period">2023 — 2024</div>
+      <div>
+        <div class="work-company">CN (via McGill)</div>
+        <div class="work-role">Data Solution Architect</div>
+        <div class="work-desc">
+          Delivered transformative data mining and analytics solutions in an academic consulting project. Translated business requirements into technical data pipelines and implementation-ready analytical workflows.
+        </div>
+      </div>
+      <div class="work-location">Montreal, Canada</div>
+    </div>
+
+    <div class="work-item">
       <div class="work-period">2021 — 2022</div>
       <div>
         <div class="work-company">Foxconn</div>
-        <div class="work-role">Technical Project Manager</div>
+        <div class="work-role">Design for Manufacturing Engineer</div>
         <div class="work-desc">
-          Manufacturer for <strong>Apple MacBook</strong>. Led data-driven failure analysis during New Product Introduction — improved process efficiency by <strong>over 50%</strong>. <strong>Saved millions USD</strong> by optimizing warehouse stacking vs. new production line investment.
+          Led failure analysis and root cause identification on the production line. Used operational systems and machine data to improve yield, optimize process efficiency, and ensure quality targets for mass production.
         </div>
       </div>
       <div class="work-location">Chengdu, China</div>
@@ -287,7 +331,7 @@
         <div class="work-company">Novartis</div>
         <div class="work-role">Commercial Business Analyst</div>
         <div class="work-desc">
-          Supported <strong>3 new drug launches</strong>. Built forecasting models and multi-source dashboards — contributed to market share gains and revenue growth.
+          Built forecasting models and multi-source dashboards to support <strong>3 new drug launches</strong>. Streamlined scheduled report preparation, giving brand managers clear visibility into market performance.
         </div>
       </div>
       <div class="work-location">Montreal, Canada</div>
@@ -308,7 +352,7 @@
     <div class="project-card">
       <div class="project-award">🥈 2nd Place · $3,000</div>
       <div class="project-title">ALDO GenAI Hackathon</div>
-      <div class="project-desc">AI self-serve tool for ALDO store managers. Team Fractals. 38 teams; presented to CEO David Bensadoun. McGill × AWS.</div>
+      <div class="project-desc">As builder and model lead, I developed an AI self-serve assistant for ALDO store managers that supports data Q&amp;A, insights exploration, and strategic decision suggestions for store operations. Built with Team Fractals in a 38-team McGill × AWS competition and presented directly to CEO David Bensadoun.</div>
       <div class="project-tags">
         <span class="project-tag">GenAI</span>
         <span class="project-tag">AWS</span>
@@ -320,7 +364,7 @@
     <div class="project-card">
       <div class="project-award">📦 Client Project</div>
       <div class="project-title">CN Rail — GenAI Classification</div>
-      <div class="project-desc">GenAI automated classification POC. <strong>50% cost reduction</strong>. Fuel efficiency analysis — break-even Year 3, CAD $1,654 cumulative savings.</div>
+      <div class="project-desc">Built a GenAI-powered automated classification POC for CN to reduce manual processing and decision latency. Delivered a <strong>50% cost reduction</strong> scenario and supported fuel-efficiency analysis showing break-even by Year 3.</div>
       <div class="project-tags">
         <span class="project-tag">Python</span>
         <span class="project-tag">VectorDB</span>
@@ -332,7 +376,7 @@
     <div class="project-card">
       <div class="project-award">🩹 Personal</div>
       <div class="project-title">ACL-Patch</div>
-      <div class="project-desc">Real-time knee biomechanics tracker using MediaPipe + OpenCV. Built pre-op for my own ACL surgery.</div>
+      <div class="project-desc">A passion project I built before my ACL surgery to record and reflect on my rehab journey. ACL-Patch also serves as a practical sandbox to practice computer vision image processing and explore GenAI model applications.</div>
       <div class="project-tags">
         <span class="project-tag">Streamlit</span>
         <span class="project-tag">MediaPipe</span>
@@ -344,7 +388,7 @@
     <div class="project-card">
       <div class="project-award">🚗 Analytics</div>
       <div class="project-title">Canadian Car Sales Forecasting</div>
-      <div class="project-desc">Time-series forecasting on Canadian automotive sales using ARIMA and ML models. End-to-end in Jupyter.</div>
+      <div class="project-desc">An end-to-end time-series forecasting example built to demonstrate my forecasting capability in a clear business context. Developed in Jupyter using ARIMA and machine learning approaches on Canadian automotive sales data.</div>
       <div class="project-tags">
         <span class="project-tag">Python</span>
         <span class="project-tag">ARIMA</span>
@@ -363,15 +407,45 @@
     <h2 class="section-title">Skills</h2>
     <div class="section-line"></div>
   </div>
+  <div class="skills-toolbar">
+    <div class="skills-chip-group" id="skillsFilters">
+      <button class="skills-chip active" data-filter="all">All</button>
+      <button class="skills-chip" data-filter="genai">GenAI</button>
+      <button class="skills-chip" data-filter="data">Data</button>
+      <button class="skills-chip" data-filter="mlops">MLOps</button>
+      <button class="skills-chip" data-filter="industry">Industry</button>
+      <button class="skills-chip" data-filter="leadership">Leadership</button>
+    </div>
+    <div class="skills-chip-group" id="skillsStories">
+      <button class="skills-chip active" data-story="all">Everything</button>
+      <button class="skills-chip" data-story="delivery">GenAI Delivery Path</button>
+      <button class="skills-chip" data-story="industrial">Industrial AI Path</button>
+      <button class="skills-chip" data-story="analytics">Analytics to Business</button>
+    </div>
+  </div>
   <div class="constellation-wrap">
     <canvas class="constellation-canvas" id="constellation"></canvas>
     <div class="constellation-overlay">
-      <div class="constellation-hint">Drag to explore · Hover nodes</div>
+      <div class="constellation-hint">Drag nodes · Hover for quick labels · Click for evidence panel</div>
       <div class="constellation-legend">
-        <div class="constellation-legend-item"><div class="constellation-legend-dot red"></div>Core skill</div>
-        <div class="constellation-legend-item"><div class="constellation-legend-dot gray"></div>Related tool</div>
+        <div class="constellation-legend-item"><div class="constellation-legend-dot core"></div>Core capability</div>
+        <div class="constellation-legend-item"><div class="constellation-legend-dot domain"></div>Domain knowledge</div>
+        <div class="constellation-legend-item"><div class="constellation-legend-dot tool"></div>Tools &amp; platforms</div>
+        <div class="constellation-legend-item"><div class="constellation-legend-dot proof"></div>Proof projects</div>
+        <div class="constellation-legend-item">Ring thickness = proficiency</div>
       </div>
     </div>
+    <aside class="skill-panel" id="skillPanel">
+      <div class="skill-panel-title">Skill Intelligence Map</div>
+      <div class="skill-panel-copy">Select a node to see context, applied evidence, and related projects. Use filters and story modes to explore focused capability paths.</div>
+      <div class="skill-panel-meta">
+        <span class="skill-panel-pill">Multi-domain</span>
+        <span class="skill-panel-pill">Business + Technical</span>
+        <span class="skill-panel-pill">Delivery-oriented</span>
+      </div>
+      <div class="skill-panel-subtitle">Try this</div>
+      <div class="skill-panel-list">1) Choose a story mode<br>2) Click a highlighted node<br>3) Follow connected tools and proof nodes</div>
+    </aside>
   </div>
 </section>
 
@@ -457,7 +531,7 @@
     </div>
 
   </div>
-  <p style="font-size:12px;color:var(--text3);margin-top:24px;">Last updated: April 2026</p>
+  <p style="font-size:12px;color:var(--text3);margin-top:24px;">Last updated: June 2026</p>
 </section>
 
 <!-- FOOTER -->
@@ -497,7 +571,7 @@
 const typewriter = document.getElementById('typewriter');
 const lines = [
   "I build <strong>AI that works in the real world</strong> — not just demos. Energy grids, factory floors, supply chains.",
-  "Former Foxconn PM. McGill analytics. Currently at <strong>Schneider Electric</strong>, rehabbing an ACL, and plotting what's next.",
+  "Former Foxconn DFM engineer. McGill analytics. Currently at <strong>Schneider Electric</strong>, leading AI solution delivery and cross-functional execution.",
   "I ship code when I face real problems — like <strong>ACL-Patch</strong>, a computer vision tracker I built before my own surgery."
 ];
 let lineIndex = 0, charIndex = 0, isDeleting = false;
@@ -527,84 +601,282 @@ setTimeout(type, 800);
 // ── CONSTELLATION ──
 const canvas = document.getElementById('constellation');
 const ctx = canvas.getContext('2d');
+const skillPanel = document.getElementById('skillPanel');
+const skillsFilters = document.getElementById('skillsFilters');
+const skillsStories = document.getElementById('skillsStories');
 let W, H;
 function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
 resize();
 window.addEventListener('resize', resize);
 
+const typeStyles = {
+  core: { fill: '#FF3B3B', glow: 'rgba(255,59,59,0.30)', label: '#F4B1B1' },
+  domain: { fill: '#FF8C00', glow: 'rgba(255,140,0,0.26)', label: '#FFD6A3' },
+  tool: { fill: '#57C7FF', glow: 'rgba(87,199,255,0.22)', label: '#BFE8FF' },
+  proof: { fill: '#8CE99A', glow: 'rgba(140,233,154,0.24)', label: '#D9FAD8' }
+};
+
 const nodes = [
-  { x: .5, y: .45, label: "GenAI", core: true, r: 18 },
-  { x: .35, y: .3, label: "RAG", core: true, r: 14 },
-  { x: .65, y: .3, label: "LLMOps", core: true, r: 14 },
-  { x: .25, y: .55, label: "Python", core: true, r: 16 },
-  { x: .75, y: .55, label: "Azure", core: true, r: 15 },
-  { x: .5, y: .2, label: "LangChain", core: false, r: 11 },
-  { x: .25, y: .2, label: "VectorDB", core: false, r: 11 },
-  { x: .75, y: .2, label: "Bedrock", core: false, r: 11 },
-  { x: .15, y: .4, label: "Pandas", core: false, r: 10 },
-  { x: .35, y: .7, label: "PyTorch", core: false, r: 12 },
-  { x: .65, y: .7, label: "TensorFlow", core: false, r: 12 },
-  { x: .85, y: .4, label: "Databricks", core: false, r: 12 },
-  { x: .5, y: .75, label: "Gurobi", core: false, r: 10 },
-  { x: .15, y: .65, label: "SQL", core: false, r: 10 },
-  { x: .85, y: .65, label: "Docker", core: false, r: 10 },
-  { x: .4, y: .5, label: "scikit-learn", core: false, r: 10 },
-  { x: .6, y: .5, label: "XGBoost", core: false, r: 10 },
-  { x: .5, y: .6, label: "PowerBI", core: false, r: 10 },
-  { x: .3, y: .8, label: "R", core: false, r: 9 },
-  { x: .7, y: .8, label: "CI/CD", core: false, r: 9 },
-  { x: .2, y: .35, label: "NLP", core: false, r: 10 },
-  { x: .8, y: .35, label: "Figma", core: false, r: 9 }
+  { id: 'genai', x: .50, y: .42, label: 'GenAI', type: 'core', level: 5, lastUsed: 2026, tags: ['genai', 'industry'], desc: 'Design and delivery of GenAI solutions for operational workflows.', evidence: 'Internal and external AI solution delivery at Schneider Electric.', projects: ['ALDO GenAI Hackathon', 'CN Rail GenAI Classification'] },
+  { id: 'rag', x: .36, y: .28, label: 'RAG', type: 'core', level: 4, lastUsed: 2026, tags: ['genai', 'mlops'], desc: 'Retrieval pipelines for grounded responses and enterprise context.', evidence: 'Used in assistant-style solutions and knowledge-heavy workflows.', projects: ['ALDO GenAI Hackathon'] },
+  { id: 'llmops', x: .66, y: .28, label: 'LLMOps', type: 'core', level: 4, lastUsed: 2026, tags: ['genai', 'mlops', 'leadership'], desc: 'Prompt, deployment, and iteration lifecycle for LLM applications.', evidence: 'Cross-functional delivery cadence as AI Solution Partner and Scrum Master.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'python', x: .24, y: .56, label: 'Python', type: 'tool', level: 5, lastUsed: 2026, tags: ['data', 'genai', 'mlops'], desc: 'Primary language for ML pipelines, analytics, and prototyping.', evidence: 'Used across portfolio projects and production-oriented prototypes.', projects: ['CN Rail GenAI Classification', 'Canadian Car Sales Forecasting', 'ACL-Patch'] },
+  { id: 'azure', x: .76, y: .56, label: 'Azure', type: 'tool', level: 4, lastUsed: 2026, tags: ['mlops', 'industry'], desc: 'Cloud platform for AI workloads and enterprise integration.', evidence: 'Applied in enterprise-facing GenAI and analytics delivery contexts.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'langchain', x: .52, y: .18, label: 'LangChain', type: 'tool', level: 4, lastUsed: 2026, tags: ['genai'], desc: 'Orchestration framework for chaining prompts, tools, and retrieval.', evidence: 'Used to structure assistant workflows and LLM interaction patterns.', projects: ['ALDO GenAI Hackathon'] },
+  { id: 'vectordb', x: .26, y: .20, label: 'VectorDB', type: 'tool', level: 4, lastUsed: 2025, tags: ['genai', 'mlops'], desc: 'Semantic indexing for retrieval and knowledge grounding.', evidence: 'Core component in classification and assistant use cases.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'bedrock', x: .76, y: .20, label: 'AWS Bedrock', type: 'tool', level: 3, lastUsed: 2024, tags: ['genai'], desc: 'Managed foundation model services for fast iteration.', evidence: 'Used in hackathon contexts and model experimentation.', projects: ['ALDO GenAI Hackathon'] },
+  { id: 'pandas', x: .14, y: .42, label: 'Pandas', type: 'tool', level: 5, lastUsed: 2026, tags: ['data'], desc: 'Data transformation and analysis foundation for model inputs.', evidence: 'Used in forecasting and operations analytics workflows.', projects: ['Canadian Car Sales Forecasting'] },
+  { id: 'pytorch', x: .36, y: .72, label: 'PyTorch', type: 'tool', level: 3, lastUsed: 2025, tags: ['data'], desc: 'Neural network experimentation and model prototyping.', evidence: 'Applied in ML experimentation and model benchmarking.', projects: [] },
+  { id: 'tensorflow', x: .66, y: .72, label: 'TensorFlow', type: 'tool', level: 3, lastUsed: 2025, tags: ['data'], desc: 'ML tooling for model experimentation and deployment readiness.', evidence: 'Used in technical model exploration and validation paths.', projects: [] },
+  { id: 'databricks', x: .86, y: .42, label: 'Databricks', type: 'tool', level: 3, lastUsed: 2025, tags: ['data', 'mlops'], desc: 'Collaborative analytics and scalable data processing environment.', evidence: 'Supports pipeline-oriented analytics and model workflows.', projects: [] },
+  { id: 'gurobi', x: .50, y: .78, label: 'Gurobi', type: 'tool', level: 3, lastUsed: 2024, tags: ['data'], desc: 'Optimization solver for constrained decision scenarios.', evidence: 'Used during analytics and optimization training and projects.', projects: [] },
+  { id: 'sql', x: .16, y: .66, label: 'SQL', type: 'tool', level: 4, lastUsed: 2026, tags: ['data', 'industry'], desc: 'Querying and shaping structured data for BI and modeling.', evidence: 'Used in analytics reporting and data pipeline preparation.', projects: ['Canadian Car Sales Forecasting'] },
+  { id: 'docker', x: .86, y: .66, label: 'Docker', type: 'tool', level: 3, lastUsed: 2025, tags: ['mlops'], desc: 'Containerization for reproducible environments and deployment.', evidence: 'Used to package and stabilize model-serving components.', projects: [] },
+  { id: 'powerbi', x: .50, y: .60, label: 'PowerBI', type: 'tool', level: 4, lastUsed: 2026, tags: ['data', 'industry'], desc: 'Business-facing analytics and dashboard storytelling.', evidence: 'Used in consulting and commercial analytics work.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'energy', x: .66, y: .46, label: 'Energy', type: 'domain', level: 4, lastUsed: 2026, tags: ['industry'], desc: 'AI applications in energy and industrial optimization contexts.', evidence: 'Schneider Electric external AI implementations.', projects: [] },
+  { id: 'industrial', x: .34, y: .46, label: 'Industrial Ops', type: 'domain', level: 4, lastUsed: 2026, tags: ['industry'], desc: 'Operational intelligence for manufacturing and utility environments.', evidence: 'Water, power, and brewing AI implementation scope.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'leadership', x: .50, y: .30, label: 'Scrum Leadership', type: 'domain', level: 4, lastUsed: 2026, tags: ['leadership'], desc: 'Cross-functional planning, sprint orchestration, and stakeholder alignment.', evidence: 'Current role as AI Solution Partner and Scrum Master.', projects: [] },
+  { id: 'cnproof', x: .30, y: .82, label: 'CN Proof', type: 'proof', level: 4, lastUsed: 2024, tags: ['industry', 'data'], desc: 'GenAI classification and fuel-efficiency analytical proof.', evidence: '50% cost reduction scenario with Year 3 break-even analysis.', projects: ['CN Rail GenAI Classification'] },
+  { id: 'aldoproof', x: .70, y: .82, label: 'ALDO Proof', type: 'proof', level: 4, lastUsed: 2024, tags: ['genai'], desc: 'Retail GenAI assistant for data Q&A, insights, and strategy suggestions.', evidence: '2nd place in a 38-team McGill x AWS hackathon.', projects: ['ALDO GenAI Hackathon'] },
+  { id: 'aclproof', x: .50, y: .90, label: 'ACL-Patch Proof', type: 'proof', level: 3, lastUsed: 2026, tags: ['genai', 'data'], desc: 'Personal CV sandbox for rehab tracking and model experimentation.', evidence: 'Built pre-op as a passion project before ACL surgery.', projects: ['ACL-Patch'] }
 ];
 
 const edges = [
-  [0,5],[0,6],[0,7],[0,1],[0,2],[0,3],[0,4],[0,16],[0,17],
-  [1,6],[1,5],[2,7],[2,5],[3,8],[3,13],[3,16],[3,14],
-  [4,11],[4,14],[4,7],[5,6],[5,7],[8,13],[8,20],
-  [9,10],[9,12],[10,12],[11,14],[16,17],[17,18],[19,14],[20,8]
+  { a: 'genai', b: 'rag', kind: 'enables', weight: .95 },
+  { a: 'genai', b: 'llmops', kind: 'enables', weight: .9 },
+  { a: 'genai', b: 'langchain', kind: 'uses', weight: .9 },
+  { a: 'genai', b: 'vectordb', kind: 'uses', weight: .85 },
+  { a: 'genai', b: 'bedrock', kind: 'uses', weight: .65 },
+  { a: 'genai', b: 'python', kind: 'uses', weight: .9 },
+  { a: 'genai', b: 'azure', kind: 'deployed-in', weight: .85 },
+  { a: 'genai', b: 'industrial', kind: 'applied-to', weight: .9 },
+  { a: 'genai', b: 'energy', kind: 'applied-to', weight: .85 },
+  { a: 'llmops', b: 'leadership', kind: 'enabled-by', weight: .8 },
+  { a: 'python', b: 'pandas', kind: 'uses', weight: .85 },
+  { a: 'python', b: 'sql', kind: 'uses', weight: .8 },
+  { a: 'python', b: 'powerbi', kind: 'enables', weight: .65 },
+  { a: 'python', b: 'databricks', kind: 'uses', weight: .6 },
+  { a: 'python', b: 'pytorch', kind: 'uses', weight: .6 },
+  { a: 'python', b: 'tensorflow', kind: 'uses', weight: .6 },
+  { a: 'python', b: 'gurobi', kind: 'uses', weight: .45 },
+  { a: 'llmops', b: 'docker', kind: 'uses', weight: .6 },
+  { a: 'genai', b: 'aldoproof', kind: 'validated-by', weight: .95 },
+  { a: 'genai', b: 'cnproof', kind: 'validated-by', weight: .9 },
+  { a: 'industrial', b: 'cnproof', kind: 'validated-by', weight: .9 },
+  { a: 'rag', b: 'aldoproof', kind: 'validated-by', weight: .75 },
+  { a: 'python', b: 'aclproof', kind: 'validated-by', weight: .7 },
+  { a: 'leadership', b: 'aldoproof', kind: 'enabled-by', weight: .55 }
 ];
 
-let scaleNodes = nodes.map(n => ({ ...n, x: n.x * W, y: n.y * H }));
+const storySets = {
+  all: null,
+  delivery: new Set(['genai', 'rag', 'llmops', 'langchain', 'vectordb', 'bedrock', 'azure', 'leadership', 'aldoproof']),
+  industrial: new Set(['genai', 'industrial', 'energy', 'python', 'sql', 'powerbi', 'azure', 'cnproof']),
+  analytics: new Set(['python', 'pandas', 'sql', 'powerbi', 'databricks', 'gurobi', 'cnproof', 'aclproof'])
+};
+
+const edgeKindColor = {
+  uses: 'rgba(87,199,255,0.45)',
+  enables: 'rgba(255,140,0,0.45)',
+  'deployed-in': 'rgba(140,233,154,0.45)',
+  'applied-to': 'rgba(255,59,59,0.4)',
+  'validated-by': 'rgba(255,255,255,0.35)',
+  'enabled-by': 'rgba(255,215,130,0.42)'
+};
+
+const nodeBaseRadius = {
+  core: 16,
+  domain: 13,
+  tool: 11,
+  proof: 12
+};
+
+let scaleNodes = nodes.map(n => {
+  const base = nodeBaseRadius[n.type] || 11;
+  const level = Number.isFinite(n.level) ? n.level : 3;
+  const computedR = n.r || Math.round(base + (level - 3) * 1.4);
+  return { ...n, r: Math.max(8, computedR), x: n.x * W, y: n.y * H, visible: true };
+});
+const nodeIndex = Object.fromEntries(scaleNodes.map((n, i) => [n.id, i]));
 let mouse = { x: -1000, y: -1000 }, dragging = null, dragOffset = { x: 0, y: 0 };
+let activeFilter = 'all';
+let activeStory = 'all';
+let selectedNodeId = null;
+
+function isVisibleNode(n) {
+  const matchFilter = activeFilter === 'all' || n.tags.includes(activeFilter);
+  const matchStory = !storySets[activeStory] || storySets[activeStory].has(n.id);
+  return matchFilter && matchStory;
+}
+
+function applyVisibility() {
+  scaleNodes.forEach(n => { n.visible = isVisibleNode(n); });
+  if (selectedNodeId) {
+    const selected = scaleNodes[nodeIndex[selectedNodeId]];
+    if (!selected || !selected.visible) {
+      selectedNodeId = null;
+      renderPanel();
+    }
+  }
+}
+
+function latestBadge(year) {
+  if (year >= 2026) return 'Active now';
+  if (year >= 2025) return 'Recently used';
+  return 'Earlier experience';
+}
+
+function renderPanel() {
+  if (!selectedNodeId) {
+    skillPanel.innerHTML = `
+      <div class="skill-panel-title">Skill Intelligence Map</div>
+      <div class="skill-panel-copy">Select a node to see context, applied evidence, and related projects. Use filters and story modes to explore focused capability paths.</div>
+      <div class="skill-panel-meta">
+        <span class="skill-panel-pill">Multi-domain</span>
+        <span class="skill-panel-pill">Business + Technical</span>
+        <span class="skill-panel-pill">Delivery-oriented</span>
+      </div>
+      <div class="skill-panel-subtitle">Try this</div>
+      <div class="skill-panel-list">1) Choose a story mode<br>2) Click a highlighted node<br>3) Follow connected tools and proof nodes</div>
+    `;
+    return;
+  }
+  const n = scaleNodes[nodeIndex[selectedNodeId]];
+  const projects = n.projects.length ? n.projects.join('<br>') : 'No project link attached yet';
+  skillPanel.innerHTML = `
+    <div class="skill-panel-title">${n.label}</div>
+    <div class="skill-panel-copy">${n.desc}</div>
+    <div class="skill-panel-meta">
+      <span class="skill-panel-pill">${n.type}</span>
+      <span class="skill-panel-pill">Proficiency ${n.level}/5</span>
+      <span class="skill-panel-pill">Last used ${n.lastUsed}</span>
+      <span class="skill-panel-pill">${latestBadge(n.lastUsed)}</span>
+    </div>
+    <div class="skill-panel-subtitle">Evidence</div>
+    <div class="skill-panel-list">${n.evidence}</div>
+    <div class="skill-panel-subtitle">Related Projects</div>
+    <div class="skill-panel-list">${projects}</div>
+  `;
+}
 
 function drawConstellation() {
   ctx.clearRect(0, 0, W, H);
-  ctx.strokeStyle = '#222'; ctx.lineWidth = 1;
-  edges.forEach(([a, b]) => {
-    const na = scaleNodes[a], nb = scaleNodes[b];
-    const dist = Math.hypot(na.x - nb.x, na.y - nb.y);
-    if (dist < 250) { ctx.globalAlpha = 1 - dist / 250; ctx.beginPath(); ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y); ctx.stroke(); }
+
+  const hoverIndex = scaleNodes.findIndex(n => n.visible && Math.hypot(mouse.x - n.x, mouse.y - n.y) < n.r + 6);
+  const selectedIndex = selectedNodeId ? nodeIndex[selectedNodeId] : -1;
+
+  edges.forEach(edge => {
+    const ia = nodeIndex[edge.a];
+    const ib = nodeIndex[edge.b];
+    const na = scaleNodes[ia];
+    const nb = scaleNodes[ib];
+    if (!na || !nb || !na.visible || !nb.visible) return;
+    const activeEdge = ia === hoverIndex || ib === hoverIndex || ia === selectedIndex || ib === selectedIndex;
+    ctx.strokeStyle = edgeKindColor[edge.kind] || 'rgba(255,255,255,0.28)';
+    ctx.globalAlpha = activeEdge ? 1 : Math.max(0.22, edge.weight * 0.7);
+    ctx.lineWidth = activeEdge ? 2.2 : 1 + edge.weight * 1.2;
+    ctx.beginPath();
+    ctx.moveTo(na.x, na.y);
+    ctx.lineTo(nb.x, nb.y);
+    ctx.stroke();
   });
+
   ctx.globalAlpha = 1;
-  scaleNodes.forEach(n => {
-    const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 2);
-    grad.addColorStop(0, n.core ? 'rgba(255,59,59,0.3)' : 'rgba(136,136,136,0.15)');
+  scaleNodes.forEach((n, idx) => {
+    if (!n.visible) return;
+    const style = typeStyles[n.type] || typeStyles.tool;
+    const glowRadius = n.r * (1.8 + (n.level * 0.08));
+    const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowRadius);
+    grad.addColorStop(0, style.glow);
     grad.addColorStop(1, 'transparent');
-    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 2, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = n.core ? '#FF3B3B' : '#444'; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2); ctx.fill();
-    const dx = mouse.x - n.x, dy = mouse.y - n.y;
-    if (Math.hypot(dx, dy) < n.r + 5) {
-      ctx.strokeStyle = '#FF3B3B'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 4, 0, Math.PI * 2); ctx.stroke();
-      ctx.strokeStyle = 'rgba(255,59,59,0.4)'; ctx.lineWidth = 1.5;
-      edges.forEach(([a, b]) => {
-        if (a === nodes.indexOf(n) || b === nodes.indexOf(n)) {
-          ctx.beginPath(); ctx.moveTo(scaleNodes[a].x, scaleNodes[a].y); ctx.lineTo(scaleNodes[b].x, scaleNodes[b].y); ctx.stroke();
-        }
-      });
-      ctx.fillStyle = 'rgba(26,26,26,0.95)'; ctx.fillRect(n.x + 15, n.y - 30, ctx.measureText(n.label).width + 20, 26);
-      ctx.fillStyle = n.core ? '#FF3B3B' : '#888'; ctx.font = 'bold 12px sans-serif'; ctx.fillText(n.label, n.x + 25, n.y - 14);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, glowRadius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = style.fill;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fill();
+
+    const isFocus = idx === hoverIndex || idx === selectedIndex;
+    ctx.strokeStyle = isFocus ? '#FFFFFF' : 'rgba(255,255,255,0.28)';
+    ctx.lineWidth = 1 + (n.level * 0.5);
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = isFocus ? '#FFF' : style.label;
+    ctx.font = isFocus ? 'bold 12px sans-serif' : '11px sans-serif';
+    const tw = ctx.measureText(n.label).width;
+    ctx.fillText(n.label, n.x - tw / 2, n.y + n.r + 15);
+
+    if (isFocus) {
+      const badge = `${n.type} · L${n.level}`;
+      const bw = ctx.measureText(badge).width + 18;
+      ctx.fillStyle = 'rgba(12,12,12,0.9)';
+      ctx.fillRect(n.x + 12, n.y - 28, bw, 22);
+      ctx.fillStyle = '#F0F0F0';
+      ctx.font = '11px sans-serif';
+      ctx.fillText(badge, n.x + 20, n.y - 13);
     }
-    ctx.fillStyle = n.core ? '#AAA' : '#555'; ctx.font = n.core ? 'bold 11px sans-serif' : '11px sans-serif';
-    const tw = ctx.measureText(n.label).width; ctx.fillText(n.label, n.x - tw/2, n.y + n.r + 14);
   });
+
   requestAnimationFrame(drawConstellation);
 }
 
+function setActiveChip(groupEl, attr, value) {
+  groupEl.querySelectorAll('.skills-chip').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset[attr] === value);
+  });
+}
+
+skillsFilters.addEventListener('click', e => {
+  const btn = e.target.closest('.skills-chip');
+  if (!btn) return;
+  activeFilter = btn.dataset.filter;
+  setActiveChip(skillsFilters, 'filter', activeFilter);
+  applyVisibility();
+});
+
+skillsStories.addEventListener('click', e => {
+  const btn = e.target.closest('.skills-chip');
+  if (!btn) return;
+  activeStory = btn.dataset.story;
+  setActiveChip(skillsStories, 'story', activeStory);
+  applyVisibility();
+});
+
 canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
 canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
-canvas.addEventListener('mousedown', e => { const r = canvas.getBoundingClientRect(); const mx = e.clientX - r.left, my = e.clientY - r.top; scaleNodes.forEach((n, i) => { if (Math.hypot(mx - n.x, my - n.y) < n.r + 5) { dragging = i; dragOffset = { x: mx - n.x, y: my - n.y }; } }); });
+canvas.addEventListener('mousedown', e => {
+  const r = canvas.getBoundingClientRect();
+  const mx = e.clientX - r.left;
+  const my = e.clientY - r.top;
+  dragging = null;
+  scaleNodes.forEach((n, i) => {
+    if (n.visible && Math.hypot(mx - n.x, my - n.y) < n.r + 6) {
+      dragging = i;
+      dragOffset = { x: mx - n.x, y: my - n.y };
+    }
+  });
+});
 window.addEventListener('mousemove', e => { if (dragging !== null) { const r = canvas.getBoundingClientRect(); scaleNodes[dragging].x = e.clientX - r.left - dragOffset.x; scaleNodes[dragging].y = e.clientY - r.top - dragOffset.y; } });
 window.addEventListener('mouseup', () => { dragging = null; });
+canvas.addEventListener('click', e => {
+  const r = canvas.getBoundingClientRect();
+  const mx = e.clientX - r.left;
+  const my = e.clientY - r.top;
+  let picked = null;
+  scaleNodes.forEach(n => {
+    if (n.visible && Math.hypot(mx - n.x, my - n.y) < n.r + 8) picked = n.id;
+  });
+  selectedNodeId = picked;
+  renderPanel();
+});
+
+applyVisibility();
+renderPanel();
 drawConstellation();
 
 // ── CHAT WIDGET (loads from external .txt file) ──
