@@ -1,999 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kelly Liu</title>
-<style>
-  :root {
-    --bg: #0A0A0A; --bg2: #111; --bg3: #1A1A1A; --border: #222;
-    --accent: #FF3B3B; --accent2: #FF6B6B;
-    --text: #F0F0F0; --text2: #888; --text3: #555; --white: #FFF;
-    --node: #FF3B3B; --node2: #888; --edge: #333;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelly Liu — AI/ML Engineer & Solution Builder</title>
+  <meta name="description" content="Kelly Liu builds reliable AI and machine learning systems across forecasting, GenAI, and industrial applications.">
+  <link rel="canonical" href="https://cliukelly.github.io/">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cliukelly.github.io/">
+  <meta property="og:title" content="Kelly Liu — AI/ML Engineer & Solution Builder">
+  <meta property="og:description" content="Forecasting, GenAI systems, and industrial AI built for real-world use.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kelly Liu — AI/ML Engineer & Solution Builder">
+  <meta name="twitter:description" content="Forecasting, GenAI systems, and industrial AI built for real-world use.">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kelly Chengyan Liu",
+    "url": "https://cliukelly.github.io/",
+    "jobTitle": "AI/ML Engineer and Solution Builder",
+    "sameAs": [
+      "https://github.com/CLIUKELLY",
+      "https://www.linkedin.com/in/kelly-chengyan-liu/"
+    ],
+    "alumniOf": [
+      {"@type": "CollegeOrUniversity", "name": "McGill University"},
+      {"@type": "CollegeOrUniversity", "name": "Concordia University"}
+    ]
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
-  a:hover { color: var(--accent); }
-
-  .mesh-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .mesh-bg .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .12; animation: meshFloat 20s ease-in-out infinite; }
-  .mesh-bg .blob:nth-child(1) { width: 600px; height: 600px; background: #FF3B3B; top: -200px; right: -100px; }
-  .mesh-bg .blob:nth-child(2) { width: 500px; height: 500px; background: #7B2FFF; bottom: -150px; left: -100px; animation-delay: -7s; }
-  .mesh-bg .blob:nth-child(3) { width: 400px; height: 400px; background: #FF8C00; top: 40%; left: 30%; animation-delay: -14s; opacity: .06; }
-  @keyframes meshFloat { 0%,100% { transform: translate(0,0) scale(1); } 25% { transform: translate(30px,-20px) scale(1.05); } 50% { transform: translate(-20px,30px) scale(.95); } 75% { transform: translate(20px,20px) scale(1.02); } }
-
-  nav { position: fixed; inset: 0 auto auto 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; background: rgba(10,10,10,.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -.3px; text-transform: uppercase; color: var(--white); }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text2); transition: color .2s; }
-  .nav-links a:hover { color: var(--accent); }
-
-  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 48px 80px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-  .hero-inner { max-width: 900px; width: 100%; }
-  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
-  .hero-eyebrow .line { width: 40px; height: 2px; background: var(--accent); animation: expandLine 1s ease-out; }
-  .hero-eyebrow span { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); }
-  .hero-name { font-size: clamp(64px, 10vw, 120px); font-weight: 900; letter-spacing: -4px; line-height: .92; color: var(--white); text-transform: uppercase; margin-bottom: 32px; }
-  .hero-name .underline { display: block; position: relative; }
-  .hero-name .underline::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 4px; background: var(--accent); animation: expandLine 1.2s ease-out .3s both; }
-  @keyframes expandLine { from { width: 0; } to { width: 100%; } }
-
-  .typewriter-container { min-height: 120px; margin-bottom: 40px; }
-  .typewriter-prompt { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .typewriter-prompt-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--white); font-weight: 700; }
-  .typewriter-prompt-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
-  .typewriter-text { font-size: 17px; color: var(--text2); line-height: 1.75; max-width: 620px; }
-  .typewriter-text strong { color: var(--text); font-weight: 600; }
-  .typewriter-cursor { display: inline-block; width: 3px; height: 1.1em; background: var(--accent); animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 2px; }
-  @keyframes blink { 50% { opacity: 0; } }
-
-  .hero-meta { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
-  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
-  .hero-meta-item .label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text3); }
-  .hero-meta-item .value { font-size: 14px; font-weight: 600; color: var(--text); }
-  .hero-cta { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
-
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-radius: 4px; transition: all .2s; cursor: pointer; border: 2px solid; }
-  .btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
-  .btn-primary:hover { background: transparent; color: var(--accent); }
-  .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border); }
-  .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
-
-  section { padding: 100px 48px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
-  .section-header { display: flex; align-items: baseline; gap: 20px; margin-bottom: 64px; }
-  .section-num { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); min-width: 32px; }
-  .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 900; letter-spacing: -1.5px; text-transform: uppercase; color: var(--white); line-height: 1.0; }
-  .section-line { flex: 1; height: 1px; background: var(--border); margin-left: 8px; }
-
-  .work-list { display: flex; flex-direction: column; gap: 0; }
-  .work-item { display: grid; grid-template-columns: 200px 1fr 140px; gap: 0 40px; align-items: start; padding: 36px 0; border-top: 1px solid var(--border); transition: all .3s; }
-  .work-item:last-child { border-bottom: 1px solid var(--border); }
-  .work-item:hover { background: rgba(255,59,59,.02); padding-left: 16px; margin-left: -16px; }
-  .work-period { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--text3); text-transform: uppercase; padding-top: 4px; }
-  .work-company { font-size: 20px; font-weight: 800; color: var(--white); letter-spacing: -.3px; margin-bottom: 4px; }
-  .work-role { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-  .work-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
-  .work-desc strong { color: var(--text); font-weight: 600; }
-  .work-location { font-size: 11px; color: var(--text3); text-align: right; padding-top: 4px; letter-spacing: .05em; }
-
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
-  .project-card { background: var(--bg2); padding: 32px; transition: background .2s; position: relative; overflow: hidden; }
-  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--accent); transition: height .3s ease; }
-  .project-card:hover { background: var(--bg3); }
-  .project-card:hover::before { height: 100%; }
-  .project-award { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-  .project-title { font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 8px; letter-spacing: -.3px; }
-  .project-desc { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 20px; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .project-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text3); border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; }
-  .project-link { display: inline-block; margin-top: 16px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-  .project-link:hover { color: var(--accent2); }
-
-  .skills-toolbar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
-  .skills-chip-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .skills-chip { background: var(--bg2); border: 1px solid var(--border); color: var(--text2); padding: 7px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: all .2s; }
-  .skills-chip:hover { border-color: var(--accent); color: var(--text); }
-  .skills-chip.active { background: rgba(255,59,59,.1); color: var(--accent); border-color: rgba(255,59,59,.45); }
-
-  .constellation-wrap { position: relative; width: 100%; height: 620px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-  .constellation-canvas { width: 100%; height: 100%; cursor: grab; }
-  .constellation-canvas:active { cursor: grabbing; }
-  .constellation-overlay { position: absolute; bottom: 24px; left: 24px; pointer-events: none; max-width: 58%; }
-  .constellation-hint { font-size: 11px; color: var(--text3); letter-spacing: .05em; }
-  .constellation-legend { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
-  .constellation-legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text2); }
-  .constellation-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .constellation-legend-dot.core { background: #FF3B3B; }
-  .constellation-legend-dot.domain { background: #FF8C00; }
-  .constellation-legend-dot.tool { background: #57C7FF; }
-  .constellation-legend-dot.proof { background: #8CE99A; }
-
-  .skill-panel {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 320px;
-    max-width: calc(100% - 32px);
-    background: rgba(15,15,15,.92);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    z-index: 2;
-    backdrop-filter: blur(8px);
-  }
-  .skill-panel-title { font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
-  .skill-panel-copy { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
-  .skill-panel-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .skill-panel-pill { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--text2); border: 1px solid var(--border); border-radius: 999px; padding: 3px 8px; }
-  .skill-panel-subtitle { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); margin: 8px 0 4px; }
-  .skill-panel-list { font-size: 12px; color: var(--text); line-height: 1.55; }
-  .skill-panel-list a { color: var(--accent2); text-decoration: none; }
-  .skill-panel-list a:hover { color: var(--accent); }
-
-  .writing-list { display: flex; flex-direction: column; gap: 0; }
-  .writing-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 0 32px; align-items: center; padding: 28px 0; border-top: 1px solid var(--border); transition: padding-left .2s; }
-  .writing-item:last-child { border-bottom: 1px solid var(--border); }
-  .writing-item:hover { padding-left: 8px; }
-  .writing-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--text3); }
-  .writing-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: -.2px; }
-  .writing-sub { font-size: 13px; color: var(--text2); }
-  .writing-coming { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; }
-
-  .now-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; }
-  .now-card { background: var(--bg2); padding: 32px; transition: background .2s; }
-  .now-card:hover { background: var(--bg3); }
-  .now-icon { font-size: 28px; margin-bottom: 16px; display: block; transition: transform .3s; }
-  .now-card:hover .now-icon { transform: scale(1.1); }
-  .now-label { font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-  .now-text { font-size: 14px; color: var(--text2); line-height: 1.7; }
-  .now-text strong { color: var(--text); }
-
-  footer { padding: 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; position: relative; z-index: 1; }
-  .footer-name { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--text3); }
-  .footer-links { display: flex; gap: 24px; list-style: none; }
-  .footer-links a { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); transition: color .2s; }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-copy { font-size: 11px; color: var(--text3); }
-
-  .chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 200; }
-  .chat-toggle { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--white); border: none; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(255,59,59,.3); transition: all .3s; animation: pulseChat 3s ease-in-out infinite; }
-  .chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,59,59,.5); }
-  .chat-toggle.active { background: var(--bg3); }
-  @keyframes pulseChat { 0%,100% { box-shadow: 0 4px 20px rgba(255,59,59,.3); } 50% { box-shadow: 0 4px 30px rgba(255,59,59,.5); } }
-  .chat-panel { position: absolute; bottom: 72px; right: 0; width: 380px; max-width: calc(100vw - 48px); max-height: 500px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,.5); transform: translateY(20px) scale(.95); opacity: 0; pointer-events: none; transition: all .3s cubic-bezier(.34,1.56,.64,1); }
-  .chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: all; }
-  .chat-header { padding: 16px 20px; background: var(--bg3); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
-  .chat-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--white); font-weight: 700; }
-  .chat-header-info { flex: 1; }
-  .chat-header-name { font-size: 14px; font-weight: 700; color: var(--white); }
-  .chat-header-status { font-size: 11px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
-  .chat-header-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #00FF85; animation: statusPulse 2s ease-in-out infinite; }
-  @keyframes statusPulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-  .chat-close { background: none; border: none; color: var(--text2); font-size: 20px; cursor: pointer; padding: 4px; line-height: 1; }
-  .chat-close:hover { color: var(--accent); }
-  .chat-body { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
-  .chat-message { max-width: 85%; padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.55; animation: messageIn .3s ease-out; }
-  @keyframes messageIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .chat-message.bot { background: var(--bg3); color: var(--text); border-bottom-left-radius: 4px; align-self: flex-start; }
-  .chat-message.user { background: var(--accent); color: var(--white); border-bottom-right-radius: 4px; align-self: flex-end; }
-  .chat-message.typing { background: var(--bg3); padding: 16px 20px; }
-  .typing-dots { display: flex; gap: 4px; }
-  .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--text2); animation: typingBounce 1.4s ease-in-out infinite; }
-  .typing-dots span:nth-child(2) { animation-delay: .2s; }
-  .typing-dots span:nth-child(3) { animation-delay: .4s; }
-  @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
-  .chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 12px; }
-  .chat-suggestion { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); padding: 6px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; transition: all .2s; white-space: nowrap; }
-  .chat-suggestion:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,59,59,.05); }
-  .chat-input-area { padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-  .chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 8px 16px; font-size: 13px; color: var(--text); outline: none; font-family: inherit; }
-  .chat-input:focus { border-color: var(--accent); }
-  .chat-input::placeholder { color: var(--text3); }
-  .chat-send { width: 36px; height: 36px; border-radius: 50%; background: var(--accent); border: none; color: var(--white); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; }
-  .chat-send:hover { background: var(--accent2); transform: scale(1.05); }
-
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { padding: 100px 24px 60px; }
-    section { padding: 64px 24px; }
-    .work-item { grid-template-columns: 1fr; gap: 8px; }
-    .work-location { text-align: left; }
-    .constellation-wrap { height: 520px; }
-    .constellation-overlay { max-width: 100%; left: 16px; bottom: 16px; }
-    .skill-panel { position: static; width: 100%; margin: 12px 0 0; }
-    .chat-panel { width: calc(100vw - 48px); }
-    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
-  }
-</style>
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ANIMATED MESH BG -->
-<div class="mesh-bg">
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
-</div>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Kelly <span>Liu</span></div>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="#now">Now</a></li>
-    <li><a href="mailto:chengyan.liu@mail.mcgill.ca" style="color:var(--accent)">Contact</a></li>
-  </ul>
-</nav>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Kelly Liu, back to top">KELLY <span>LIU</span></a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="menu-label">Menu</span>
+      <span class="menu-icon" aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#about">About</a>
+      <a class="nav-contact" href="mailto:chengyan.liu@mail.mcgill.ca">Contact</a>
+    </nav>
+  </header>
 
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <div class="line"></div>
-      <span>AI Solution Partner &amp; Scrum Master · Beijing, China</span>
-    </div>
-    <div class="hero-name">
-      Kelly
-      <span class="underline">Liu.</span>
-    </div>
-    <div class="typewriter-container">
-      <div class="typewriter-prompt">
-        <div class="typewriter-prompt-icon">AI</div>
-        <span class="typewriter-prompt-label">What's your story?</span>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Beijing · Montreal</p>
+        <h1>AI/ML systems<br>built for the<br><em>real world.</em></h1>
+        <p class="hero-lead">I’m Kelly Liu. I turn complex business problems into reliable, production-oriented solutions across forecasting, GenAI, and industrial applications.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">View selected work</a>
+          <a class="button button-secondary" href="mailto:chengyan.liu@mail.mcgill.ca">Start a conversation</a>
+        </div>
+        <ul class="profile-links" aria-label="Profile links">
+          <li><a href="https://github.com/CLIUKELLY" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+        </ul>
       </div>
-      <div class="typewriter-text" id="typewriter"></div>
-    </div>
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="label">Currently</span>
-        <span class="value">Schneider Electric</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Education</span>
-        <span class="value">McGill MMA · Concordia</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Based in</span>
-        <span class="value">Beijing 🇨🇳</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Languages</span>
-        <span class="value">EN · 中文</span>
-      </div>
-    </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#work">See My Work</a>
-      <a class="btn btn-ghost" href="https://github.com/CLIUKELLY" target="_blank">GitHub ↗</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank">LinkedIn ↗</a>
-    </div>
-  </div>
-</section>
 
-<!-- WORK -->
-<section id="work">
-  <div class="section-header">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Work</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="work-list">
+      <aside class="focus-panel" aria-label="Current focus">
+        <p class="panel-kicker">Current focus</p>
+        <ol>
+          <li><span>01</span><div><strong>Forecasting systems</strong><p>Stable ML pipelines, model evaluation, and explainable outputs.</p></div></li>
+          <li><span>02</span><div><strong>GenAI engineering</strong><p>Model evaluation, tool-using agents, and enterprise adoption.</p></div></li>
+          <li><span>03</span><div><strong>Industrial AI</strong><p>Applied intelligence for operations, quality, and energy.</p></div></li>
+        </ol>
+      </aside>
+    </section>
 
-    <div class="work-item">
-      <div class="work-period">2024 — Present</div>
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <p class="section-index">01 / Selected work</p>
+        <h2>Proof over<br>promises.</h2>
+        <p>Projects where I owned the path from an ambiguous problem to a testable, usable solution.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project project-featured">
+          <div class="project-meta"><span>Forecasting · 2026</span><span>Machine Learning</span></div>
+          <div class="project-body">
+            <div>
+              <p class="project-number">01</p>
+              <h3>Cash-flow Forecasting System</h3>
+            </div>
+            <div class="project-copy">
+              <p>Designed a reusable forecasting workflow that moves beyond one-off notebooks: standardized data preparation, time-series feature engineering, model selection, walk-forward validation, and governed batch execution.</p>
+              <dl class="outcomes">
+                <div><dt>Challenge</dt><dd>Reliable forecasts across different business scenarios</dd></div>
+                <div><dt>Built</dt><dd>Reusable ML pipeline with validation and model monitoring</dd></div>
+                <div><dt>Stack</dt><dd>Python · XGBoost · SageMaker · Docker</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta"><span>GenAI · 2026</span><span>Evaluation & Adoption</span></div>
+          <div class="project-body">
+            <div>
+              <p class="project-number">02</p>
+              <h3>AI Coding Model Evaluation</h3>
+            </div>
+            <div class="project-copy">
+              <p>Built an evidence-based evaluation approach for coding models across requirements, design, implementation, testing, and documentation—connecting model quality with real developer workflows.</p>
+              <dl class="outcomes">
+                <div><dt>Challenge</dt><dd>Compare fast-changing models beyond synthetic benchmarks</dd></div>
+                <div><dt>Built</dt><dd>Scenario-based framework covering quality, completion, efficiency, and experience</dd></div>
+                <div><dt>Focus</dt><dd>Model selection · Telemetry · Governance · Adoption</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta"><span>Industrial AI · 2026</span><span>Computer Vision</span></div>
+          <div class="project-body">
+            <div>
+              <p class="project-number">03</p>
+              <h3>Visual Defect Data Engine</h3>
+            </div>
+            <div class="project-copy">
+              <p>Developed a workflow for generating and evaluating hard-to-collect defect samples, helping computer-vision teams test model robustness before production data is abundant.</p>
+              <dl class="outcomes">
+                <div><dt>Challenge</dt><dd>Rare defects and expensive negative-sample collection</dd></div>
+                <div><dt>Built</dt><dd>Generation, quality screening, and model-based evaluation workflow</dd></div>
+                <div><dt>Focus</dt><dd>Synthetic data · Evaluation · Production readiness</dd></div>
+              </dl>
+            </div>
+          </div>
+        </article>
+
+        <article class="project project-personal">
+          <div class="project-meta"><span>Personal build · 2026</span><span>Computer Vision</span></div>
+          <div class="project-body">
+            <div>
+              <p class="project-number">04</p>
+              <h3>ACL-Patch</h3>
+            </div>
+            <div class="project-copy">
+              <p>Built a computer-vision rehab tracker before my own ACL surgery—a practical experiment in turning a personal problem into a small, shippable product.</p>
+              <dl class="outcomes">
+                <div><dt>Built with</dt><dd>Streamlit · MediaPipe · OpenCV</dd></div>
+                <div><dt>Explored</dt><dd>Movement tracking · Visual feedback · Rapid prototyping</dd></div>
+              </dl>
+              <a class="text-link" href="https://github.com/CLIUKELLY/ACL-Patch" target="_blank" rel="noopener noreferrer">View repository <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-heading compact">
+        <p class="section-index">02 / Experience</p>
+        <h2>Built across<br>disciplines.</h2>
+      </div>
+
+      <div class="timeline">
+        <article>
+          <p class="timeline-date">2024 — Present</p>
+          <div><h3>Schneider Electric</h3><p class="role">AI Solution Partner & Scrum Master · Beijing</p><p>Building and scaling AI solutions across forecasting, GenAI, and industrial use cases. Working between technical teams, business owners, and delivery stakeholders to move ideas toward reliable operation.</p></div>
+        </article>
+        <article>
+          <p class="timeline-date">2023 — 2024</p>
+          <div><h3>CN × McGill</h3><p class="role">Data Solution Architect · Montreal</p><p>Designed a GenAI-assisted classification solution and implementation-ready analytics workflow for an applied consulting engagement.</p></div>
+        </article>
+        <article>
+          <p class="timeline-date">2021 — 2022</p>
+          <div><h3>Foxconn</h3><p class="role">Design for Manufacturing Engineer · Chengdu</p><p>Led production-line failure analysis and process improvement, combining engineering judgment with operational data to improve mass-production quality.</p></div>
+        </article>
+        <article>
+          <p class="timeline-date">2018 — 2020</p>
+          <div><h3>Novartis</h3><p class="role">Commercial Business Analyst · Montreal</p><p>Built forecasting models and multi-source dashboards supporting three product launches and clearer market-performance decisions.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
+      <div class="section-heading">
+        <p class="section-index">03 / Capabilities</p>
+        <h2>Depth where<br>it matters.</h2>
+        <p>No self-scored skill bars—just the capabilities I use and the evidence behind them.</p>
+      </div>
+
+      <div class="capability-grid">
+        <article>
+          <p class="capability-index">A</p>
+          <h3>Forecasting & ML</h3>
+          <p>Time-series modeling, feature engineering, model selection, walk-forward validation, explainability, and reusable forecast pipelines.</p>
+          <ul><li>Cash-flow forecasting</li><li>Automotive sales forecasting</li><li>Commercial analytics</li></ul>
+        </article>
+        <article>
+          <p class="capability-index">B</p>
+          <h3>GenAI Systems</h3>
+          <p>LLM evaluation, RAG, tool integration, agent workflows, prompt and model governance, and adoption measurement.</p>
+          <ul><li>AI coding evaluation</li><li>CN classification solution</li><li>ALDO self-serve assistant</li></ul>
+        </article>
+        <article>
+          <p class="capability-index">C</p>
+          <h3>Production Engineering</h3>
+          <p>Packaging, cloud execution, monitoring, and the operating model needed to move an ML experiment toward dependable use.</p>
+          <ul><li>AWS & Azure</li><li>Docker & CI/CD</li><li>Data and model pipelines</li></ul>
+        </article>
+        <article>
+          <p class="capability-index">D</p>
+          <h3>Industrial Context</h3>
+          <p>Hands-on experience connecting AI with manufacturing, energy, quality, and operational decision-making.</p>
+          <ul><li>Factory quality</li><li>Energy and water</li><li>Cross-functional delivery</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
       <div>
-        <div class="work-company">Schneider Electric</div>
-        <div class="work-role">AI Solution Partner &amp; Scrum Master</div>
-        <div class="work-desc">
-          Converted from AI Algorithm Engineer Intern to AI Solution Partner. Managing development of internal AI solutions, leading cross-functional teams, and implementing external AI solutions for <strong>water, power, and brewing sectors</strong>. Mentoring internal AI contests and the external <strong>GO GREEN</strong> competition.
+        <p class="section-index">04 / About</p>
+        <h2>Business fluency.<br>Engineering instinct.</h2>
+      </div>
+      <div class="about-copy">
+        <p>I started in commercial analytics, moved onto the factory floor, and then deepened my data and machine-learning practice at McGill. That path shaped how I work today: understand the operating reality, build the smallest useful system, and make it reliable enough to earn trust.</p>
+        <p>Outside work, I’m returning to MMA after ACL rehab and exploring small product experiments through indie hacking.</p>
+        <div class="education">
+          <div><span>McGill University</span><strong>Master of Management in Analytics</strong></div>
+          <div><span>Concordia University</span><strong>BComm · Business Technology Management & Computer Science</strong></div>
         </div>
       </div>
-      <div class="work-location">Beijing, China</div>
-    </div>
-
-    <div class="work-item">
-      <div class="work-period">2023 — 2024</div>
-      <div>
-        <div class="work-company">CN (via McGill)</div>
-        <div class="work-role">Data Solution Architect</div>
-        <div class="work-desc">
-          Delivered transformative data mining and analytics solutions in an academic consulting project. Translated business requirements into technical data pipelines and implementation-ready analytical workflows.
-        </div>
-      </div>
-      <div class="work-location">Montreal, Canada</div>
-    </div>
-
-    <div class="work-item">
-      <div class="work-period">2021 — 2022</div>
-      <div>
-        <div class="work-company">Foxconn</div>
-        <div class="work-role">Design for Manufacturing Engineer</div>
-        <div class="work-desc">
-          Led failure analysis and root cause identification on the production line. Used operational systems and machine data to improve yield, optimize process efficiency, and ensure quality targets for mass production.
-        </div>
-      </div>
-      <div class="work-location">Chengdu, China</div>
-    </div>
-
-    <div class="work-item">
-      <div class="work-period">2018 — 2020</div>
-      <div>
-        <div class="work-company">Novartis</div>
-        <div class="work-role">Commercial Business Analyst</div>
-        <div class="work-desc">
-          Built forecasting models and multi-source dashboards to support <strong>3 new drug launches</strong>. Streamlined scheduled report preparation, giving brand managers clear visibility into market performance.
-        </div>
-      </div>
-      <div class="work-location">Montreal, Canada</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-header">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Projects</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="projects-grid">
-
-    <div class="project-card">
-      <div class="project-award">🥈 2nd Place · $3,000</div>
-      <div class="project-title">ALDO GenAI Hackathon</div>
-      <div class="project-desc">As builder and model lead, I developed an AI self-serve assistant for ALDO store managers that supports data Q&amp;A, insights exploration, and strategic decision suggestions for store operations. Built with Team Fractals in a 38-team McGill × AWS competition and presented directly to CEO David Bensadoun.</div>
-      <div class="project-tags">
-        <span class="project-tag">GenAI</span>
-        <span class="project-tag">AWS</span>
-        <span class="project-tag">Retail</span>
-        <span class="project-tag">Oct 2024</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-award">📦 Client Project</div>
-      <div class="project-title">CN Rail — GenAI Classification</div>
-      <div class="project-desc">Built a GenAI-powered automated classification POC for CN to reduce manual processing and decision latency. Delivered a <strong>50% cost reduction</strong> scenario and supported fuel-efficiency analysis showing break-even by Year 3.</div>
-      <div class="project-tags">
-        <span class="project-tag">Python</span>
-        <span class="project-tag">VectorDB</span>
-        <span class="project-tag">Azure</span>
-        <span class="project-tag">PowerBI</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-award">🩹 Personal</div>
-      <div class="project-title">ACL-Patch</div>
-      <div class="project-desc">A passion project I built before my ACL surgery to record and reflect on my rehab journey. ACL-Patch also serves as a practical sandbox to practice computer vision image processing and explore GenAI model applications.</div>
-      <div class="project-tags">
-        <span class="project-tag">Streamlit</span>
-        <span class="project-tag">MediaPipe</span>
-        <span class="project-tag">OpenCV</span>
-      </div>
-      <a class="project-link" href="https://github.com/CLIUKELLY/ACL-Patch" target="_blank">View on GitHub ↗</a>
-    </div>
-
-    <div class="project-card">
-      <div class="project-award">🚗 Analytics</div>
-      <div class="project-title">Canadian Car Sales Forecasting</div>
-      <div class="project-desc">An end-to-end time-series forecasting example built to demonstrate my forecasting capability in a clear business context. Developed in Jupyter using ARIMA and machine learning approaches on Canadian automotive sales data.</div>
-      <div class="project-tags">
-        <span class="project-tag">Python</span>
-        <span class="project-tag">ARIMA</span>
-        <span class="project-tag">Forecasting</span>
-      </div>
-      <a class="project-link" href="https://github.com/CLIUKELLY/Canadian-Car-Sales-Forecasting" target="_blank">View on GitHub ↗</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- SKILLS CONSTELLATION -->
-<section id="skills">
-  <div class="section-header">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Skills</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="skills-toolbar">
-    <div class="skills-chip-group" id="skillsFilters">
-      <button class="skills-chip active" data-filter="all">All</button>
-      <button class="skills-chip" data-filter="genai">GenAI</button>
-      <button class="skills-chip" data-filter="data">Data</button>
-      <button class="skills-chip" data-filter="mlops">MLOps</button>
-      <button class="skills-chip" data-filter="industry">Industry</button>
-      <button class="skills-chip" data-filter="leadership">Leadership</button>
-    </div>
-    <div class="skills-chip-group" id="skillsStories">
-      <button class="skills-chip active" data-story="all">Everything</button>
-      <button class="skills-chip" data-story="delivery">GenAI Delivery Path</button>
-      <button class="skills-chip" data-story="industrial">Industrial AI Path</button>
-      <button class="skills-chip" data-story="analytics">Analytics to Business</button>
-    </div>
-  </div>
-  <div class="constellation-wrap">
-    <canvas class="constellation-canvas" id="constellation"></canvas>
-    <div class="constellation-overlay">
-      <div class="constellation-hint">Drag nodes · Hover for quick labels · Click for evidence panel</div>
-      <div class="constellation-legend">
-        <div class="constellation-legend-item"><div class="constellation-legend-dot core"></div>Core capability</div>
-        <div class="constellation-legend-item"><div class="constellation-legend-dot domain"></div>Domain knowledge</div>
-        <div class="constellation-legend-item"><div class="constellation-legend-dot tool"></div>Tools &amp; platforms</div>
-        <div class="constellation-legend-item"><div class="constellation-legend-dot proof"></div>Proof projects</div>
-        <div class="constellation-legend-item">Ring thickness = proficiency</div>
-      </div>
-    </div>
-    <aside class="skill-panel" id="skillPanel">
-      <div class="skill-panel-title">Skill Intelligence Map</div>
-      <div class="skill-panel-copy">Select a node to see context, applied evidence, and related projects. Use filters and story modes to explore focused capability paths.</div>
-      <div class="skill-panel-meta">
-        <span class="skill-panel-pill">Multi-domain</span>
-        <span class="skill-panel-pill">Business + Technical</span>
-        <span class="skill-panel-pill">Delivery-oriented</span>
-      </div>
-      <div class="skill-panel-subtitle">Try this</div>
-      <div class="skill-panel-list">1) Choose a story mode<br>2) Click a highlighted node<br>3) Follow connected tools and proof nodes</div>
-    </aside>
-  </div>
-</section>
-
-<!-- WRITING -->
-<section id="writing">
-  <div class="section-header">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Writing</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="writing-list">
-
-    <div class="writing-item">
-      <div class="writing-num">01</div>
-      <div>
-        <div class="writing-title">Why GenAI POCs fail in heavy industry (and how CN Rail was different)</div>
-        <div class="writing-sub">The gap between a demo and a production system — from someone who's bridged it.</div>
-      </div>
-      <span class="writing-coming">Coming soon</span>
-    </div>
-
-    <div class="writing-item">
-      <div class="writing-num">02</div>
-      <div>
-        <div class="writing-title">What 5–10% energy savings actually looks like with AI</div>
-        <div class="writing-sub">Real numbers from real industrial deployments at Schneider Electric.</div>
-      </div>
-      <span class="writing-coming">Coming soon</span>
-    </div>
-
-    <div class="writing-item">
-      <div class="writing-num">03</div>
-      <div>
-        <div class="writing-title">I built a computer vision app in 3 days before my ACL surgery</div>
-        <div class="writing-sub">A walkthrough of ACL-Patch — and what MediaPipe taught me about fast prototyping.</div>
-      </div>
-      <span class="writing-coming">Coming soon</span>
-    </div>
-
-    <div class="writing-item">
-      <div class="writing-num">04</div>
-      <div>
-        <div class="writing-title">The Foxconn to McGill to Schneider arc — building a career across two countries</div>
-        <div class="writing-sub">On moving between Montreal and Beijing, and why the hybrid path is worth it.</div>
-      </div>
-      <span class="writing-coming">Coming soon</span>
-    </div>
-
-  </div>
-</section>
-
-<!-- NOW -->
-<section id="now">
-  <div class="section-header">
-    <span class="section-num">05</span>
-    <h2 class="section-title">Now</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="now-grid">
-
-    <div class="now-card">
-      <span class="now-icon">⚡</span>
-      <div class="now-label">Day Job</div>
-      <div class="now-text">At <strong>Schneider Electric in Beijing</strong> — deploying AI for energy management and industrial automation. Bridging Chinese and international teams.</div>
-    </div>
-
-    <div class="now-card">
-      <span class="now-icon">🦵</span>
-      <div class="now-label">Recovery</div>
-      <div class="now-text">Post-ACL surgery (Jan 31, 2026). Doing the physio, tracking angles with my own app. Slowly getting back to <strong>MMA and the gym</strong>.</div>
-    </div>
-
-    <div class="now-card">
-      <span class="now-icon">📈</span>
-      <div class="now-label">Investing</div>
-      <div class="now-text">Actively investing in <strong>stocks and ETFs</strong>. Learning the markets while figuring out where the world is heading.</div>
-    </div>
-
-    <div class="now-card">
-      <span class="now-icon">🛠️</span>
-      <div class="now-label">Building (Soon)</div>
-      <div class="now-text">Indie hacking is on the roadmap. I have the tools, the domain knowledge, and the itch. <strong>The product idea is forming.</strong></div>
-    </div>
-
-  </div>
-  <p style="font-size:12px;color:var(--text3);margin-top:24px;">Last updated: June 2026</p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-name">Kelly Liu © 2026</div>
-  <ul class="footer-links">
-    <li><a href="https://github.com/CLIUKELLY" target="_blank">GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/kelly-chengyan-liu/" target="_blank">LinkedIn</a></li>
-    <li><a href="mailto:chengyan.liu@mail.mcgill.ca">Email</a></li>
-  </ul>
-  <div class="footer-copy">Beijing · Montreal · Built with intent.</div>
-</footer>
-
-<!-- CHAT WIDGET -->
-<div class="chat-widget">
-  <div class="chat-panel" id="chatPanel">
-    <div class="chat-header">
-      <div class="chat-avatar">K</div>
-      <div class="chat-header-info">
-        <div class="chat-header-name">Ask Kelly</div>
-        <div class="chat-header-status"><span class="chat-header-status-dot"></span>Online now</div>
-      </div>
-      <button class="chat-close" id="chatClose">×</button>
-    </div>
-    <div class="chat-body" id="chatBody"></div>
-    <div class="chat-suggestions" id="chatSuggestions"></div>
-    <div class="chat-input-area">
-      <input class="chat-input" id="chatInput" type="text" placeholder="Ask me anything..." />
-      <button class="chat-send" id="chatSend">→</button>
-    </div>
-  </div>
-  <button class="chat-toggle" id="chatToggle">💬</button>
-</div>
-
-<script>
-// ── TYPEWRITER ──
-const typewriter = document.getElementById('typewriter');
-const lines = [
-  "I build <strong>AI that works in the real world</strong> — not just demos. Energy grids, factory floors, supply chains.",
-  "Former Foxconn DFM engineer. McGill analytics. Currently at <strong>Schneider Electric</strong>, leading AI solution delivery and cross-functional execution.",
-  "I ship code when I face real problems — like <strong>ACL-Patch</strong>, a computer vision tracker I built before my own surgery."
-];
-let lineIndex = 0, charIndex = 0, isDeleting = false;
-
-function type() {
-  const currentLine = lines[lineIndex];
-  if (!isDeleting && charIndex < currentLine.length) {
-    typewriter.innerHTML = currentLine.substring(0, charIndex + 1) + '<span class="typewriter-cursor"></span>';
-    charIndex++;
-    setTimeout(type, 40 + Math.random() * 30);
-  } else if (isDeleting && charIndex > 0) {
-    typewriter.innerHTML = currentLine.substring(0, charIndex - 1) + '<span class="typewriter-cursor"></span>';
-    charIndex--;
-    setTimeout(type, 20);
-  } else {
-    if (!isDeleting) {
-      setTimeout(() => { isDeleting = true; type(); }, 3000);
-    } else {
-      isDeleting = false;
-      lineIndex = (lineIndex + 1) % lines.length;
-      setTimeout(type, 500);
-    }
-  }
-}
-setTimeout(type, 800);
-
-// ── CONSTELLATION ──
-const canvas = document.getElementById('constellation');
-const ctx = canvas.getContext('2d');
-const skillPanel = document.getElementById('skillPanel');
-const skillsFilters = document.getElementById('skillsFilters');
-const skillsStories = document.getElementById('skillsStories');
-let W, H;
-function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-resize();
-window.addEventListener('resize', resize);
-
-const typeStyles = {
-  core: { fill: '#FF3B3B', glow: 'rgba(255,59,59,0.30)', label: '#F4B1B1' },
-  domain: { fill: '#FF8C00', glow: 'rgba(255,140,0,0.26)', label: '#FFD6A3' },
-  tool: { fill: '#57C7FF', glow: 'rgba(87,199,255,0.22)', label: '#BFE8FF' },
-  proof: { fill: '#8CE99A', glow: 'rgba(140,233,154,0.24)', label: '#D9FAD8' }
-};
-
-const nodes = [
-  { id: 'genai', x: .50, y: .42, label: 'GenAI', type: 'core', level: 5, lastUsed: 2026, tags: ['genai', 'industry'], desc: 'Design and delivery of GenAI solutions for operational workflows.', evidence: 'Internal and external AI solution delivery at Schneider Electric.', projects: ['ALDO GenAI Hackathon', 'CN Rail GenAI Classification'] },
-  { id: 'rag', x: .36, y: .28, label: 'RAG', type: 'core', level: 4, lastUsed: 2026, tags: ['genai', 'mlops'], desc: 'Retrieval pipelines for grounded responses and enterprise context.', evidence: 'Used in assistant-style solutions and knowledge-heavy workflows.', projects: ['ALDO GenAI Hackathon'] },
-  { id: 'llmops', x: .66, y: .28, label: 'LLMOps', type: 'core', level: 4, lastUsed: 2026, tags: ['genai', 'mlops', 'leadership'], desc: 'Prompt, deployment, and iteration lifecycle for LLM applications.', evidence: 'Cross-functional delivery cadence as AI Solution Partner and Scrum Master.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'python', x: .24, y: .56, label: 'Python', type: 'tool', level: 5, lastUsed: 2026, tags: ['data', 'genai', 'mlops'], desc: 'Primary language for ML pipelines, analytics, and prototyping.', evidence: 'Used across portfolio projects and production-oriented prototypes.', projects: ['CN Rail GenAI Classification', 'Canadian Car Sales Forecasting', 'ACL-Patch'] },
-  { id: 'azure', x: .76, y: .56, label: 'Azure', type: 'tool', level: 4, lastUsed: 2026, tags: ['mlops', 'industry'], desc: 'Cloud platform for AI workloads and enterprise integration.', evidence: 'Applied in enterprise-facing GenAI and analytics delivery contexts.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'langchain', x: .52, y: .18, label: 'LangChain', type: 'tool', level: 4, lastUsed: 2026, tags: ['genai'], desc: 'Orchestration framework for chaining prompts, tools, and retrieval.', evidence: 'Used to structure assistant workflows and LLM interaction patterns.', projects: ['ALDO GenAI Hackathon'] },
-  { id: 'vectordb', x: .26, y: .20, label: 'VectorDB', type: 'tool', level: 4, lastUsed: 2025, tags: ['genai', 'mlops'], desc: 'Semantic indexing for retrieval and knowledge grounding.', evidence: 'Core component in classification and assistant use cases.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'bedrock', x: .76, y: .20, label: 'AWS Bedrock', type: 'tool', level: 3, lastUsed: 2024, tags: ['genai'], desc: 'Managed foundation model services for fast iteration.', evidence: 'Used in hackathon contexts and model experimentation.', projects: ['ALDO GenAI Hackathon'] },
-  { id: 'pandas', x: .14, y: .42, label: 'Pandas', type: 'tool', level: 5, lastUsed: 2026, tags: ['data'], desc: 'Data transformation and analysis foundation for model inputs.', evidence: 'Used in forecasting and operations analytics workflows.', projects: ['Canadian Car Sales Forecasting'] },
-  { id: 'pytorch', x: .36, y: .72, label: 'PyTorch', type: 'tool', level: 3, lastUsed: 2025, tags: ['data'], desc: 'Neural network experimentation and model prototyping.', evidence: 'Applied in ML experimentation and model benchmarking.', projects: [] },
-  { id: 'tensorflow', x: .66, y: .72, label: 'TensorFlow', type: 'tool', level: 3, lastUsed: 2025, tags: ['data'], desc: 'ML tooling for model experimentation and deployment readiness.', evidence: 'Used in technical model exploration and validation paths.', projects: [] },
-  { id: 'databricks', x: .86, y: .42, label: 'Databricks', type: 'tool', level: 3, lastUsed: 2025, tags: ['data', 'mlops'], desc: 'Collaborative analytics and scalable data processing environment.', evidence: 'Supports pipeline-oriented analytics and model workflows.', projects: [] },
-  { id: 'gurobi', x: .50, y: .78, label: 'Gurobi', type: 'tool', level: 3, lastUsed: 2024, tags: ['data'], desc: 'Optimization solver for constrained decision scenarios.', evidence: 'Used during analytics and optimization training and projects.', projects: [] },
-  { id: 'sql', x: .16, y: .66, label: 'SQL', type: 'tool', level: 4, lastUsed: 2026, tags: ['data', 'industry'], desc: 'Querying and shaping structured data for BI and modeling.', evidence: 'Used in analytics reporting and data pipeline preparation.', projects: ['Canadian Car Sales Forecasting'] },
-  { id: 'docker', x: .86, y: .66, label: 'Docker', type: 'tool', level: 3, lastUsed: 2025, tags: ['mlops'], desc: 'Containerization for reproducible environments and deployment.', evidence: 'Used to package and stabilize model-serving components.', projects: [] },
-  { id: 'powerbi', x: .50, y: .60, label: 'PowerBI', type: 'tool', level: 4, lastUsed: 2026, tags: ['data', 'industry'], desc: 'Business-facing analytics and dashboard storytelling.', evidence: 'Used in consulting and commercial analytics work.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'energy', x: .66, y: .46, label: 'Energy', type: 'domain', level: 4, lastUsed: 2026, tags: ['industry'], desc: 'AI applications in energy and industrial optimization contexts.', evidence: 'Schneider Electric external AI implementations.', projects: [] },
-  { id: 'industrial', x: .34, y: .46, label: 'Industrial Ops', type: 'domain', level: 4, lastUsed: 2026, tags: ['industry'], desc: 'Operational intelligence for manufacturing and utility environments.', evidence: 'Water, power, and brewing AI implementation scope.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'leadership', x: .50, y: .30, label: 'Scrum Leadership', type: 'domain', level: 4, lastUsed: 2026, tags: ['leadership'], desc: 'Cross-functional planning, sprint orchestration, and stakeholder alignment.', evidence: 'Current role as AI Solution Partner and Scrum Master.', projects: [] },
-  { id: 'cnproof', x: .30, y: .82, label: 'CN Proof', type: 'proof', level: 4, lastUsed: 2024, tags: ['industry', 'data'], desc: 'GenAI classification and fuel-efficiency analytical proof.', evidence: '50% cost reduction scenario with Year 3 break-even analysis.', projects: ['CN Rail GenAI Classification'] },
-  { id: 'aldoproof', x: .70, y: .82, label: 'ALDO Proof', type: 'proof', level: 4, lastUsed: 2024, tags: ['genai'], desc: 'Retail GenAI assistant for data Q&A, insights, and strategy suggestions.', evidence: '2nd place in a 38-team McGill x AWS hackathon.', projects: ['ALDO GenAI Hackathon'] },
-  { id: 'aclproof', x: .50, y: .90, label: 'ACL-Patch Proof', type: 'proof', level: 3, lastUsed: 2026, tags: ['genai', 'data'], desc: 'Personal CV sandbox for rehab tracking and model experimentation.', evidence: 'Built pre-op as a passion project before ACL surgery.', projects: ['ACL-Patch'] }
-];
-
-const edges = [
-  { a: 'genai', b: 'rag', kind: 'enables', weight: .95 },
-  { a: 'genai', b: 'llmops', kind: 'enables', weight: .9 },
-  { a: 'genai', b: 'langchain', kind: 'uses', weight: .9 },
-  { a: 'genai', b: 'vectordb', kind: 'uses', weight: .85 },
-  { a: 'genai', b: 'bedrock', kind: 'uses', weight: .65 },
-  { a: 'genai', b: 'python', kind: 'uses', weight: .9 },
-  { a: 'genai', b: 'azure', kind: 'deployed-in', weight: .85 },
-  { a: 'genai', b: 'industrial', kind: 'applied-to', weight: .9 },
-  { a: 'genai', b: 'energy', kind: 'applied-to', weight: .85 },
-  { a: 'llmops', b: 'leadership', kind: 'enabled-by', weight: .8 },
-  { a: 'python', b: 'pandas', kind: 'uses', weight: .85 },
-  { a: 'python', b: 'sql', kind: 'uses', weight: .8 },
-  { a: 'python', b: 'powerbi', kind: 'enables', weight: .65 },
-  { a: 'python', b: 'databricks', kind: 'uses', weight: .6 },
-  { a: 'python', b: 'pytorch', kind: 'uses', weight: .6 },
-  { a: 'python', b: 'tensorflow', kind: 'uses', weight: .6 },
-  { a: 'python', b: 'gurobi', kind: 'uses', weight: .45 },
-  { a: 'llmops', b: 'docker', kind: 'uses', weight: .6 },
-  { a: 'genai', b: 'aldoproof', kind: 'validated-by', weight: .95 },
-  { a: 'genai', b: 'cnproof', kind: 'validated-by', weight: .9 },
-  { a: 'industrial', b: 'cnproof', kind: 'validated-by', weight: .9 },
-  { a: 'rag', b: 'aldoproof', kind: 'validated-by', weight: .75 },
-  { a: 'python', b: 'aclproof', kind: 'validated-by', weight: .7 },
-  { a: 'leadership', b: 'aldoproof', kind: 'enabled-by', weight: .55 }
-];
-
-const storySets = {
-  all: null,
-  delivery: new Set(['genai', 'rag', 'llmops', 'langchain', 'vectordb', 'bedrock', 'azure', 'leadership', 'aldoproof']),
-  industrial: new Set(['genai', 'industrial', 'energy', 'python', 'sql', 'powerbi', 'azure', 'cnproof']),
-  analytics: new Set(['python', 'pandas', 'sql', 'powerbi', 'databricks', 'gurobi', 'cnproof', 'aclproof'])
-};
-
-const edgeKindColor = {
-  uses: 'rgba(87,199,255,0.45)',
-  enables: 'rgba(255,140,0,0.45)',
-  'deployed-in': 'rgba(140,233,154,0.45)',
-  'applied-to': 'rgba(255,59,59,0.4)',
-  'validated-by': 'rgba(255,255,255,0.35)',
-  'enabled-by': 'rgba(255,215,130,0.42)'
-};
-
-const nodeBaseRadius = {
-  core: 16,
-  domain: 13,
-  tool: 11,
-  proof: 12
-};
-
-let scaleNodes = nodes.map(n => {
-  const base = nodeBaseRadius[n.type] || 11;
-  const level = Number.isFinite(n.level) ? n.level : 3;
-  const computedR = n.r || Math.round(base + (level - 3) * 1.4);
-  return { ...n, r: Math.max(8, computedR), x: n.x * W, y: n.y * H, visible: true };
-});
-const nodeIndex = Object.fromEntries(scaleNodes.map((n, i) => [n.id, i]));
-let mouse = { x: -1000, y: -1000 }, dragging = null, dragOffset = { x: 0, y: 0 };
-let activeFilter = 'all';
-let activeStory = 'all';
-let selectedNodeId = null;
-
-function isVisibleNode(n) {
-  const matchFilter = activeFilter === 'all' || n.tags.includes(activeFilter);
-  const matchStory = !storySets[activeStory] || storySets[activeStory].has(n.id);
-  return matchFilter && matchStory;
-}
-
-function applyVisibility() {
-  scaleNodes.forEach(n => { n.visible = isVisibleNode(n); });
-  if (selectedNodeId) {
-    const selected = scaleNodes[nodeIndex[selectedNodeId]];
-    if (!selected || !selected.visible) {
-      selectedNodeId = null;
-      renderPanel();
-    }
-  }
-}
-
-function latestBadge(year) {
-  if (year >= 2026) return 'Active now';
-  if (year >= 2025) return 'Recently used';
-  return 'Earlier experience';
-}
-
-function renderPanel() {
-  if (!selectedNodeId) {
-    skillPanel.innerHTML = `
-      <div class="skill-panel-title">Skill Intelligence Map</div>
-      <div class="skill-panel-copy">Select a node to see context, applied evidence, and related projects. Use filters and story modes to explore focused capability paths.</div>
-      <div class="skill-panel-meta">
-        <span class="skill-panel-pill">Multi-domain</span>
-        <span class="skill-panel-pill">Business + Technical</span>
-        <span class="skill-panel-pill">Delivery-oriented</span>
-      </div>
-      <div class="skill-panel-subtitle">Try this</div>
-      <div class="skill-panel-list">1) Choose a story mode<br>2) Click a highlighted node<br>3) Follow connected tools and proof nodes</div>
-    `;
-    return;
-  }
-  const n = scaleNodes[nodeIndex[selectedNodeId]];
-  const projects = n.projects.length ? n.projects.join('<br>') : 'No project link attached yet';
-  skillPanel.innerHTML = `
-    <div class="skill-panel-title">${n.label}</div>
-    <div class="skill-panel-copy">${n.desc}</div>
-    <div class="skill-panel-meta">
-      <span class="skill-panel-pill">${n.type}</span>
-      <span class="skill-panel-pill">Proficiency ${n.level}/5</span>
-      <span class="skill-panel-pill">Last used ${n.lastUsed}</span>
-      <span class="skill-panel-pill">${latestBadge(n.lastUsed)}</span>
-    </div>
-    <div class="skill-panel-subtitle">Evidence</div>
-    <div class="skill-panel-list">${n.evidence}</div>
-    <div class="skill-panel-subtitle">Related Projects</div>
-    <div class="skill-panel-list">${projects}</div>
-  `;
-}
-
-function drawConstellation() {
-  ctx.clearRect(0, 0, W, H);
-
-  const hoverIndex = scaleNodes.findIndex(n => n.visible && Math.hypot(mouse.x - n.x, mouse.y - n.y) < n.r + 6);
-  const selectedIndex = selectedNodeId ? nodeIndex[selectedNodeId] : -1;
-
-  edges.forEach(edge => {
-    const ia = nodeIndex[edge.a];
-    const ib = nodeIndex[edge.b];
-    const na = scaleNodes[ia];
-    const nb = scaleNodes[ib];
-    if (!na || !nb || !na.visible || !nb.visible) return;
-    const activeEdge = ia === hoverIndex || ib === hoverIndex || ia === selectedIndex || ib === selectedIndex;
-    ctx.strokeStyle = edgeKindColor[edge.kind] || 'rgba(255,255,255,0.28)';
-    ctx.globalAlpha = activeEdge ? 1 : Math.max(0.22, edge.weight * 0.7);
-    ctx.lineWidth = activeEdge ? 2.2 : 1 + edge.weight * 1.2;
-    ctx.beginPath();
-    ctx.moveTo(na.x, na.y);
-    ctx.lineTo(nb.x, nb.y);
-    ctx.stroke();
-  });
-
-  ctx.globalAlpha = 1;
-  scaleNodes.forEach((n, idx) => {
-    if (!n.visible) return;
-    const style = typeStyles[n.type] || typeStyles.tool;
-    const glowRadius = n.r * (1.8 + (n.level * 0.08));
-    const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowRadius);
-    grad.addColorStop(0, style.glow);
-    grad.addColorStop(1, 'transparent');
-    ctx.fillStyle = grad;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, glowRadius, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.fillStyle = style.fill;
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-    ctx.fill();
-
-    const isFocus = idx === hoverIndex || idx === selectedIndex;
-    ctx.strokeStyle = isFocus ? '#FFFFFF' : 'rgba(255,255,255,0.28)';
-    ctx.lineWidth = 1 + (n.level * 0.5);
-    ctx.beginPath();
-    ctx.arc(n.x, n.y, n.r + 3, 0, Math.PI * 2);
-    ctx.stroke();
-
-    ctx.fillStyle = isFocus ? '#FFF' : style.label;
-    ctx.font = isFocus ? 'bold 12px sans-serif' : '11px sans-serif';
-    const tw = ctx.measureText(n.label).width;
-    ctx.fillText(n.label, n.x - tw / 2, n.y + n.r + 15);
-
-    if (isFocus) {
-      const badge = `${n.type} · L${n.level}`;
-      const bw = ctx.measureText(badge).width + 18;
-      ctx.fillStyle = 'rgba(12,12,12,0.9)';
-      ctx.fillRect(n.x + 12, n.y - 28, bw, 22);
-      ctx.fillStyle = '#F0F0F0';
-      ctx.font = '11px sans-serif';
-      ctx.fillText(badge, n.x + 20, n.y - 13);
-    }
-  });
-
-  requestAnimationFrame(drawConstellation);
-}
-
-function setActiveChip(groupEl, attr, value) {
-  groupEl.querySelectorAll('.skills-chip').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset[attr] === value);
-  });
-}
-
-skillsFilters.addEventListener('click', e => {
-  const btn = e.target.closest('.skills-chip');
-  if (!btn) return;
-  activeFilter = btn.dataset.filter;
-  setActiveChip(skillsFilters, 'filter', activeFilter);
-  applyVisibility();
-});
-
-skillsStories.addEventListener('click', e => {
-  const btn = e.target.closest('.skills-chip');
-  if (!btn) return;
-  activeStory = btn.dataset.story;
-  setActiveChip(skillsStories, 'story', activeStory);
-  applyVisibility();
-});
-
-canvas.addEventListener('mousemove', e => { const r = canvas.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
-canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
-canvas.addEventListener('mousedown', e => {
-  const r = canvas.getBoundingClientRect();
-  const mx = e.clientX - r.left;
-  const my = e.clientY - r.top;
-  dragging = null;
-  scaleNodes.forEach((n, i) => {
-    if (n.visible && Math.hypot(mx - n.x, my - n.y) < n.r + 6) {
-      dragging = i;
-      dragOffset = { x: mx - n.x, y: my - n.y };
-    }
-  });
-});
-window.addEventListener('mousemove', e => { if (dragging !== null) { const r = canvas.getBoundingClientRect(); scaleNodes[dragging].x = e.clientX - r.left - dragOffset.x; scaleNodes[dragging].y = e.clientY - r.top - dragOffset.y; } });
-window.addEventListener('mouseup', () => { dragging = null; });
-canvas.addEventListener('click', e => {
-  const r = canvas.getBoundingClientRect();
-  const mx = e.clientX - r.left;
-  const my = e.clientY - r.top;
-  let picked = null;
-  scaleNodes.forEach(n => {
-    if (n.visible && Math.hypot(mx - n.x, my - n.y) < n.r + 8) picked = n.id;
-  });
-  selectedNodeId = picked;
-  renderPanel();
-});
-
-applyVisibility();
-renderPanel();
-drawConstellation();
-
-// ── CHAT WIDGET (loads from external .txt file) ──
-const chatToggle = document.getElementById('chatToggle');
-const chatPanel = document.getElementById('chatPanel');
-const chatClose = document.getElementById('chatClose');
-const chatBody = document.getElementById('chatBody');
-const chatInput = document.getElementById('chatInput');
-const chatSend = document.getElementById('chatSend');
-const chatSuggestions = document.getElementById('chatSuggestions');
-
-let chatKB = {};
-
-// Load knowledge base from external file
-async function loadChatKB() {
-  try {
-    const resp = await fetch('kelly-chat-kb.txt');
-    const text = await resp.text();
-    const sections = text.split(/\n\[(.+?)\]\n/);
-    for (let i = 1; i < sections.length; i += 2) {
-      chatKB[sections[i].toLowerCase()] = sections[i + 1].trim();
-    }
-  } catch (e) {
-    console.error('Failed to load chat KB:', e);
-    chatKB = {
-      background: "I'm Kelly — an AI Engineer at Schneider Electric. Ask me about my work, projects, or how to reach me.",
-      default: "I build AI systems for real industrial problems. Ask me about my work at Schneider, Foxconn, or my GenAI projects."
-    };
-  }
-}
-loadChatKB();
-
-function addMessage(text, isUser) {
-  const msg = document.createElement('div');
-  msg.className = `chat-message ${isUser ? 'user' : 'bot'}`;
-  msg.innerHTML = text;
-  chatBody.appendChild(msg);
-  chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function showTyping(callback) {
-  const typing = document.createElement('div');
-  typing.className = 'chat-message typing';
-  typing.id = 'typingIndicator';
-  typing.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-  chatBody.appendChild(typing);
-  chatBody.scrollTop = chatBody.scrollHeight;
-  setTimeout(() => {
-    const ind = document.getElementById('typingIndicator');
-    if (ind) ind.remove();
-    callback();
-  }, 800 + Math.random() * 600);
-}
-
-function respond(text) {
-  const lower = text.toLowerCase();
-  let response = chatKB.default || "I build AI systems for real industrial problems. Ask me about my work, projects, or how to reach me.";
-  
-  // Simple keyword matching against KB keys
-  for (const [key, value] of Object.entries(chatKB)) {
-    if (key === 'default') continue;
-    if (lower.includes(key)) { response = value; break; }
-  }
-  // Fallback keyword matching
-  if (response === chatKB.default) {
-    if (lower.includes('who') || lower.includes('background') || lower.includes('about you')) response = chatKB.background || response;
-    else if (lower.includes('work') || lower.includes('job') || lower.includes('experience') || lower.includes('career')) response = chatKB.experience || response;
-    else if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('tool')) response = chatKB.skills || response;
-    else if (lower.includes('contact') || lower.includes('email') || lower.includes('reach') || lower.includes('find you')) response = chatKB.contact || response;
-    else if (lower.includes('hire') || lower.includes('open') || lower.includes('available') || lower.includes('freelance')) response = chatKB.hire || response;
-    else if (lower.includes('project')) response = chatKB.projects || response;
-    else if (lower.includes('school') || lower.includes('education') || lower.includes('degree') || lower.includes('mcgill') || lower.includes('concordia')) response = chatKB.education || response;
-    else if (lower.includes('hobby') || lower.includes('mma') || lower.includes('fight') || lower.includes('invest')) response = chatKB.hobbies || response;
-  }
-  
-  showTyping(() => addMessage(response.replace(/\n/g, '<br>'), false));
-}
-
-function updateSuggestions() {
-  const suggestions = ['Background?', 'Experience?', 'Skills?', 'Projects?', 'Contact?', 'Hire you?'];
-  chatSuggestions.innerHTML = '';
-  suggestions.forEach(s => {
-    const btn = document.createElement('button');
-    btn.className = 'chat-suggestion';
-    btn.textContent = s;
-    btn.onclick = () => { addMessage(s, true); respond(s); };
-    chatSuggestions.appendChild(btn);
-  });
-}
-
-chatToggle.addEventListener('click', () => {
-  chatPanel.classList.toggle('open');
-  chatToggle.classList.toggle('active');
-  if (chatPanel.classList.contains('open') && chatBody.children.length === 0) {
-    setTimeout(() => {
-      addMessage("Hi! I'm Kelly. Ask me anything about my work, projects, or background.", false);
-      updateSuggestions();
-    }, 400);
-  }
-});
-
-chatClose.addEventListener('click', () => {
-  chatPanel.classList.remove('open');
-  chatToggle.classList.remove('active');
-});
-
-function sendMessage() {
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMessage(text, true);
-  chatInput.value = '';
-  respond(text);
-}
-
-chatSend.addEventListener('click', sendMessage);
-chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
-</script>
-
+    </section>
+
+    <section class="contact-section" id="contact">
+      <p class="section-index">05 / Contact</p>
+      <h2>Have a hard problem<br>worth building for?</h2>
+      <a class="contact-link" href="mailto:chengyan.liu@mail.mcgill.ca">chengyan.liu@mail.mcgill.ca <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Kelly Liu © 2026</p>
+    <p>Beijing · Montreal</p>
+    <p>Updated September 2026</p>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
