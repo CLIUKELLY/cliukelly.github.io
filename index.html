@@ -36,6 +36,9 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <canvas class="particle-field" id="particle-field" aria-hidden="true"></canvas>
+  <div class="pointer-aura" id="pointer-aura" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
 
@@ -56,9 +59,9 @@
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="hero-copy">
+      <div class="hero-copy" data-parallax="-0.012">
         <p class="eyebrow"><span></span> Beijing · Montreal</p>
-        <h1>AI/ML systems<br>built for the<br><em>real world.</em></h1>
+        <h1 class="hero-title"><span>AI/ML systems</span><span>built for the</span><span><em>real world.</em></span></h1>
         <p class="hero-lead">I’m Kelly Liu. I turn complex business problems into reliable, production-oriented solutions across forecasting, GenAI, and industrial applications.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">View selected work</a>
@@ -70,7 +73,7 @@
         </ul>
       </div>
 
-      <aside class="focus-panel" aria-label="Current focus">
+      <aside class="focus-panel interactive-card" aria-label="Current focus" data-parallax="0.018">
         <p class="panel-kicker">Current focus</p>
         <ol>
           <li><span>01</span><div><strong>Forecasting systems</strong><p>Stable ML pipelines, model evaluation, and explainable outputs.</p></div></li>
@@ -81,14 +84,14 @@
     </section>
 
     <section class="section" id="projects">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <p class="section-index">01 / Selected work</p>
         <h2>Proof over<br>promises.</h2>
         <p>Projects where I owned the path from an ambiguous problem to a testable, usable solution.</p>
       </div>
 
       <div class="project-list">
-        <article class="project project-featured">
+        <article class="project project-featured interactive-card reveal">
           <div class="project-meta"><span>Forecasting · 2026</span><span>Machine Learning</span></div>
           <div class="project-body">
             <div>
@@ -106,7 +109,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project interactive-card reveal">
           <div class="project-meta"><span>GenAI · 2026</span><span>Evaluation & Adoption</span></div>
           <div class="project-body">
             <div>
@@ -124,7 +127,7 @@
           </div>
         </article>
 
-        <article class="project">
+        <article class="project interactive-card reveal">
           <div class="project-meta"><span>Industrial AI · 2026</span><span>Computer Vision</span></div>
           <div class="project-body">
             <div>
@@ -142,7 +145,7 @@
           </div>
         </article>
 
-        <article class="project project-personal">
+        <article class="project project-personal interactive-card reveal">
           <div class="project-meta"><span>Personal build · 2026</span><span>Computer Vision</span></div>
           <div class="project-body">
             <div>
@@ -163,25 +166,25 @@
     </section>
 
     <section class="section" id="experience">
-      <div class="section-heading compact">
+      <div class="section-heading compact reveal">
         <p class="section-index">02 / Experience</p>
         <h2>Built across<br>disciplines.</h2>
       </div>
 
       <div class="timeline">
-        <article>
+        <article class="reveal">
           <p class="timeline-date">2024 — Present</p>
           <div><h3>Schneider Electric</h3><p class="role">AI Solution Partner & Scrum Master · Beijing</p><p>Building and scaling AI solutions across forecasting, GenAI, and industrial use cases. Working between technical teams, business owners, and delivery stakeholders to move ideas toward reliable operation.</p></div>
         </article>
-        <article>
+        <article class="reveal">
           <p class="timeline-date">2023 — 2024</p>
           <div><h3>CN × McGill</h3><p class="role">Data Solution Architect · Montreal</p><p>Designed a GenAI-assisted classification solution and implementation-ready analytics workflow for an applied consulting engagement.</p></div>
         </article>
-        <article>
+        <article class="reveal">
           <p class="timeline-date">2021 — 2022</p>
           <div><h3>Foxconn</h3><p class="role">Design for Manufacturing Engineer · Chengdu</p><p>Led production-line failure analysis and process improvement, combining engineering judgment with operational data to improve mass-production quality.</p></div>
         </article>
-        <article>
+        <article class="reveal">
           <p class="timeline-date">2018 — 2020</p>
           <div><h3>Novartis</h3><p class="role">Commercial Business Analyst · Montreal</p><p>Built forecasting models and multi-source dashboards supporting three product launches and clearer market-performance decisions.</p></div>
         </article>
@@ -189,32 +192,32 @@
     </section>
 
     <section class="section" id="capabilities">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <p class="section-index">03 / Capabilities</p>
         <h2>Depth where<br>it matters.</h2>
         <p>No self-scored skill bars—just the capabilities I use and the evidence behind them.</p>
       </div>
 
       <div class="capability-grid">
-        <article>
+        <article class="interactive-card reveal">
           <p class="capability-index">A</p>
           <h3>Forecasting & ML</h3>
           <p>Time-series modeling, feature engineering, model selection, walk-forward validation, explainability, and reusable forecast pipelines.</p>
           <ul><li>Cash-flow forecasting</li><li>Automotive sales forecasting</li><li>Commercial analytics</li></ul>
         </article>
-        <article>
+        <article class="interactive-card reveal">
           <p class="capability-index">B</p>
           <h3>GenAI Systems</h3>
           <p>LLM evaluation, RAG, tool integration, agent workflows, prompt and model governance, and adoption measurement.</p>
           <ul><li>AI coding evaluation</li><li>CN classification solution</li><li>ALDO self-serve assistant</li></ul>
         </article>
-        <article>
+        <article class="interactive-card reveal">
           <p class="capability-index">C</p>
           <h3>Production Engineering</h3>
           <p>Packaging, cloud execution, monitoring, and the operating model needed to move an ML experiment toward dependable use.</p>
           <ul><li>AWS & Azure</li><li>Docker & CI/CD</li><li>Data and model pipelines</li></ul>
         </article>
-        <article>
+        <article class="interactive-card reveal">
           <p class="capability-index">D</p>
           <h3>Industrial Context</h3>
           <p>Hands-on experience connecting AI with manufacturing, energy, quality, and operational decision-making.</p>
@@ -224,11 +227,11 @@
     </section>
 
     <section class="section about" id="about">
-      <div>
+      <div class="reveal">
         <p class="section-index">04 / About</p>
         <h2>Business fluency.<br>Engineering instinct.</h2>
       </div>
-      <div class="about-copy">
+      <div class="about-copy reveal">
         <p>I started in commercial analytics, moved onto the factory floor, and then deepened my data and machine-learning practice at McGill. That path shaped how I work today: understand the operating reality, build the smallest useful system, and make it reliable enough to earn trust.</p>
         <p>Outside work, I’m returning to MMA after ACL rehab and exploring small product experiments through indie hacking.</p>
         <div class="education">
@@ -238,7 +241,7 @@
       </div>
     </section>
 
-    <section class="contact-section" id="contact">
+    <section class="contact-section reveal" id="contact">
       <p class="section-index">05 / Contact</p>
       <h2>Have a hard problem<br>worth building for?</h2>
       <a class="contact-link" href="mailto:chengyan.liu@mail.mcgill.ca">chengyan.liu@mail.mcgill.ca <span aria-hidden="true">↗</span></a>
