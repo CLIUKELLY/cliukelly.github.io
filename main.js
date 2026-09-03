@@ -111,6 +111,7 @@ let canvasHeight = 0;
 let dpr = 1;
 let particleFrame = 0;
 let pageVisible = true;
+let lastParticlePaint = 0;
 
 const particlePalette = [
   'rgba(255,255,255,.72)',
@@ -136,19 +137,24 @@ function makeParticle() {
 function resizeParticleField() {
   canvasWidth = window.innerWidth;
   canvasHeight = window.innerHeight;
-  dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+  dpr = Math.min(window.devicePixelRatio || 1, 1.35);
   canvas.width = Math.floor(canvasWidth * dpr);
   canvas.height = Math.floor(canvasHeight * dpr);
   canvas.style.width = `${canvasWidth}px`;
   canvas.style.height = `${canvasHeight}px`;
   context.setTransform(dpr, 0, 0, dpr, 0, 0);
-  const density = window.innerWidth < 700 ? 17000 : 12500;
-  const targetCount = Math.max(28, Math.min(86, Math.round((canvasWidth * canvasHeight) / density)));
+  const density = window.innerWidth < 700 ? 22000 : 18000;
+  const targetCount = Math.max(20, Math.min(54, Math.round((canvasWidth * canvasHeight) / density)));
   particles = Array.from({ length: targetCount }, makeParticle);
 }
 
 function drawParticles(time) {
   if (!pageVisible) return;
+  if (time - lastParticlePaint < 33) {
+    particleFrame = requestAnimationFrame(drawParticles);
+    return;
+  }
+  lastParticlePaint = time;
   context.clearRect(0, 0, canvasWidth, canvasHeight);
 
   for (let i = 0; i < particles.length; i += 1) {
